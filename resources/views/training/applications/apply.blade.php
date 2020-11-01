@@ -119,9 +119,6 @@
                 <p style="font-size: 1.2em;" class="mt-3">
                     If you believe there has been an error, please contact us so that we can investigate.
                 </p>
-                <div class="d-flex flex-row">
-                    <a href="{{route('TODO: TicketURL', ['create' => 'yes', 'department' => 'firchief', 'title' => 'Issue with hour requirement check on application system'])}}" class="btn bg-czqo-blue-light" role="button">Create a support ticket</a>
-                </div>
             </div>
         </div>
     </div>
@@ -146,9 +143,6 @@
                 <p style="font-size: 1.2em;" class="mt-3">
                     If you believe there has been an error, please contact us so that we can investigate.
                 </p>
-                <div class="d-flex flex-row">
-                    <a href="{{route('TODO: TicketURL', ['create' => 'yes', 'department' => 'firchief', 'title' => 'Issue with rating requirement check on application system'])}}" class="btn bg-czqo-blue-light" role="button">Create a support ticket</a>
-                </div>
             </div>
         </div>
     </div>
