@@ -308,7 +308,7 @@
                                 <div class="grey lighten-3 p-4" style="border-radius: 20px;">
                                     <div class="d-flex flex-row">
                                         <img style="height: 40px; margin-right: 20px;" src="https://resources.ganderoceanic.com/media/img/brand/sqr/ZQO_SQ_TSPBLUE.png" alt="">
-                                        <p class="font-weight-bold" style="width: 75%; text-align:left; font-size: 1.1em;">Chat with our Gander Oceanic controller and pilot community</p>
+                                        <p class="font-weight-bold" style="width: 75%; text-align:left; font-size: 1.1em;">Chat with our awesome Gander Oceanic pilot and controller community!</p>
                                     </div>
                                 </div>
                             </li>
@@ -316,7 +316,8 @@
                                 <div class="grey lighten-3 p-4" style="border-radius: 20px;">
                                     <div class="d-flex flex-row">
                                         <i style="font-size:35px; margin-right:20px;" class="far fa-newspaper blue-text"></i>
-                                        <p class="font-weight-bold" style="width: 75%; text-align:left; font-size: 1.1em;">Get the latest CZQO and VATSIM news, and other relevant updates</p>
+                                        <p class="font-weight-bold" style="width: 75%; text-align:left; font-size: 1.1em;">Receive the latest VATSIM and CZQO news, as well as other relevant updates.
+                                        </p>
                                     </div>
                                 </div>
                             </li>
@@ -324,7 +325,7 @@
                                 <div class="grey lighten-3 p-4" style="border-radius: 20px;">
                                     <div class="d-flex flex-row">
                                         <i style="font-size:35px; margin-right:20px;" class="fas fa-user-friends blue-text"></i>
-                                        <p class="font-weight-bold" style="width: 75%; text-align:left; font-size: 1.1em;">Find people to have a controlling<br>session with</p>
+                                        <p class="font-weight-bold" style="width: 75%; text-align:left; font-size: 1.1em;">Fly and control with and under the guidance of our expert team of oceanic controllers.</p>
                                     </div>
                                 </div>
                             </li>
