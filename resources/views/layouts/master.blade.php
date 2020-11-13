@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+@php if (!isset($solidNavBar)) $solidNavBar = true @endphp
 <html lang="en">
     <head>
         <!--
@@ -31,7 +32,7 @@
         <meta name="theme-color" content="#0080c9">
         <meta name="og:title" content="@yield('title', '')Gander Oceanic OCA">
         <meta name="og:description" content="@yield('description', '')">
-        <meta name="og:image" content="@yield('image','https://resources.ganderoceanic.com/media/img/brand/sqr/ZQO_SQ_TSPBLUE.png')">
+        <meta name="og:image" content="@yield('image','https://cdn.ganderoceanic.com/resources/media/img/brand/sqr/ZQO_SQ_TSPBLUE.png')">
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -92,7 +93,7 @@
         <!--Chart js-->
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
     </head>
-    <body @if(Auth::check() && Auth::user()->preferences) @if(Auth::user()->preferences->accent_colour) data-accent="{{Auth::user()->preferences->accent_colour}}" @endif data-theme="{{Auth::user()->preferences->ui_mode}}" @else data-theme="light" @endif>
+    <body class="d-flex flex-column min-vh-100" @if(Auth::check() && Auth::user()->preferences) @if(Auth::user()->preferences->accent_colour) data-accent="{{Auth::user()->preferences->accent_colour}}" @endif data-theme="{{Auth::user()->preferences->ui_mode}}" @else data-theme="light" @endif>
     <!--Header-->
     @include('maintenancemode::notification')
     @if (\App\Models\Settings\CoreSettings::where('id', 1)->firstOrFail()->banner)
@@ -173,30 +174,30 @@
             }).showToast();
         </script>
         @endif
-        @if(Request::is('my') || Request::is('/') || Request::is('events/*') || Request::is('news/*'))
+        @if(!$solidNavBar)
             <div class="d-none d-xl-block">
                 <nav id="czqoHeaderLight" class="navbar navbar-expand-xl navbar-dark transparent shadow-none p-0" style="min-height:59px; z-index:999;">
                     @include('layouts.navbar-main')
                 </nav>
             </div>
             <div class="d-xl-none">
-                <nav id="czqoHeaderLight" class="navbar navbar-expand-lg navbar-dark blue p-0" style="min-height:59px; z-index:999">
+                <nav id="czqoHeaderLight" class="navbar navbar-expand-lg navbar-dark blue p-0 shadow-none" style="min-height:59px; z-index:999">
                     @include('layouts.navbar-main')
                 </nav>
             </div>
         @else
-            <nav id="czqoHeaderLight" class="navbar navbar-expand-lg navbar-dark blue p-0" style="min-height:59px;">
+            <nav id="czqoHeaderLight" class="navbar navbar-expand-lg navbar-dark blue p-0 shadow-none" style="min-height:59px;">
                 @include('layouts.navbar-main')
             </nav>
         @endif
     </header>
     <!--End header-->
-    <div id="czqoContent" @if(Request::is('my') || Request::is('/') || Request::is('events/*') || Request::is('news/*')) style="margin-top: calc(-59px + -0.5rem);" @endif>
+    <div class="flex-fill" id="czqoContent" @if(!$solidNavBar) style="margin-top: calc(-59px + -0.5rem);" @endif>
         @yield('content')
     </div>
     <!-- Footer -->
     <!-- Footer -->
-    <footer class="page-footer text-dark font-small py-4 mt-5">
+    <footer class="page-footer text-dark font-small py-4" style="bottom:0">
         <div class="container">
             <p style="font-size: 0.9em;">For Flight Simulation Use Only - Not To Be Used For Real World Navigation. Any and all proprietary content available on this website may not be shared, copied, reproduced or used in any way without providing credit to the Gander Oceanic OCA - VATCAN. If in doubt, contact the Deputy OCA Chief.</p>
             <p style="font-size: 0.9em;">Copyright © {{App\Models\Settings\CoreSettings::where('id', 1)->firstOrFail()->copyright_year}} Gander Oceanic - All Rights Reserved.</p>
@@ -307,8 +308,8 @@
                             <li class="w-100">
                                 <div class="grey lighten-3 p-4" style="border-radius: 20px;">
                                     <div class="d-flex flex-row">
-                                        <img style="height: 40px; margin-right: 20px;" src="https://resources.ganderoceanic.com/media/img/brand/sqr/ZQO_SQ_TSPBLUE.png" alt="">
-                                        <p class="font-weight-bold" style="width: 75%; text-align:left; font-size: 1.1em;">Chat with our awesome Gander Oceanic pilot and controller community!</p>
+                                        <img style="height: 40px; margin-right: 20px;" src="https://cdn.ganderoceanic.com/resources/media/img/brand/sqr/ZQO_SQ_TSPBLUE.png" alt="">
+                                        <p class="font-weight-bold" style="width: 75%; text-align:left; font-size: 1.1em;">Chat with our Gander Oceanic controller and pilot community</p>
                                     </div>
                                 </div>
                             </li>

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master', ['solidNavBar' => false])
 @section('title', 'Home - ')
 @section('description', 'Cool, calm and collected oceanic control services in the North Atlantic on VATSIM.')
 
@@ -142,6 +142,9 @@
                     <p style="font-size: 1.2em;" class="mt-3">
                         Gander Oceanic is VATSIM's coolest, calmest and most collected provider of Oceanic control. With our worldwide team of skilled Oceanic controllers, we pride ourselves on our expert, high-quality service to pilots flying across the North Atlantic. Our incredible community of pilots and controllers extend their warmest welcome and wish you all the best for your oceanic crossings!
                     </p>
+                    <p style="font-size: 1.2em;" class="mt-3">
+                        <a class="font-weight-bold text-body" href="{{route('about.who-we-are')}}">Who we are &nbsp;&nbsp;<i class="fas fa-arrow-right blue-text"></i></a>
+                    </p>
                     <div class="d-flex flex-row">
                         @if(!Auth::check() || Auth::user()->can('start-application'))
                         <a href="{{route('training.applications.apply')}}" role="button" class="btn bg-czqo-blue-light">Apply Now</a>
@@ -198,7 +201,7 @@
         </div>
     </div>
     <div class="jumbtron">
-        <div class="container py-5">
+        <div class="container pt-5">
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="d-flex flex-row justify-content-left">
@@ -211,6 +214,7 @@
                         </div>
                     </div>
                     <div class="list-group">
+                        @if($tweets)
                         @foreach($tweets as $t)
                             <a href="https://twitter.com/ganderocavatsim/status/{{$t['id']}}" target="_blank" class="list-group-item list-group-item-action">
                                 <p>
@@ -231,6 +235,9 @@
                                 </p>
                             </a>
                         @endforeach
+                        @else
+                        No tweets found
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
@@ -277,6 +284,15 @@
                             </a>
                         </li>
                         <li class="mb-3">
+                            <a href="https://www.youtube.com/channel/UC3norFpW3Cw4ryGR7ourjcA" style="text-decoration:none;">
+                                <span class="blue-text">
+                                    <i class="fab fa-youtube fa-2x" style="vertical-align:middle;"></i>
+                                </span>
+                                &nbsp;
+                                <span class="black-text">YouTube Channel</span>
+                            </a>
+                        </li>
+                        <li class="mb-3">
                             <a href="https://knowledgebase.ganderoceanic.com" style="text-decoration:none;">
                                 <span class="blue-text">
                                     <i class="fas fa-book fa-2x" style="vertical-align:middle;"></i>
@@ -293,7 +309,7 @@
     <script>
         jarallax(document.querySelectorAll('.jarallax'), {
             speed: 0.5,
-            videoSrc: 'mp4:https://resources.ganderoceanic.com/media/video/ZQO_SITE_TIMELAPSE.mp4',
+            videoSrc: 'mp4:https://cdn.ganderoceanic.com/resources/media/video/ZQO_SITE_TIMELAPSE.mp4',
             videoLoop: true
         });
 

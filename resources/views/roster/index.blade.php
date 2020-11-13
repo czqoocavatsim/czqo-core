@@ -1,19 +1,22 @@
-@extends('layouts.master')
+@extends('layouts.master', ['solidNavBar' => false])
 
-@section('navbarprim')
-
-    @parent
-
-@stop
 
 @section('title', 'Controller Roster - ')
 @section('description', "Gander Oceanic's Oceanic Controller Roster")
 
 @section('content')
-<div class="container" style="margin-top: 20px;">
-        <h1 class="blue-text font-weight-bold">Controller Roster</h1>
-        <hr>
-        <p>Please note that the 'full name' field on this roster is dependent on the controller's individual name settings on the CZQO Core system.<br><i class="fas fa-certificate"></i> = Solo Certification</p>
+
+<div class="card card-image blue rounded-0">
+    <div class="text-white text-left pb-2 pt-5 px-4">
+        <div class="container">
+            <div class="py-5">
+                <h1 class="font-weight-bold" style="font-size: 3em;">Controller Roster</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container py-4">
+        <p class="text-muted">Please note that the 'full name' field on this roster is dependent on the controller's individual name settings on the CZQO Core system.<br><i class="fas fa-certificate"></i> = Solo Certification</p>
         <table id="rosterTable" class="table table-hover">
             <thead>
                 <tr>
@@ -69,10 +72,12 @@
         </table>
     <script>
         $(document).ready(function() {
+            $.fn.dataTable.enum(['C1', 'C3', 'I1', 'I3', 'SUP', 'ADM'])
             $('#rosterTable').DataTable( {
                 "order": [[ 0, "asc" ]]
             } );
         } );
     </script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/enum.js"></script>
 </div>
-@stop
+@endsection
