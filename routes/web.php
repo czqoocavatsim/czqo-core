@@ -14,6 +14,7 @@
 //Public views
 
 use App\Models\Users\User;
+use Illuminate\Support\Facades\Route;
 use Thujohn\Twitter\Facades\Twitter;
 
 Route::get('/', 'PrimaryViewsController@home')->name('index');
@@ -38,10 +39,6 @@ Route::prefix('about')->group(function () {
     Route::view('/who-we-are', 'about.who-we-are')->name('about.who-we-are');
     Route::view('/core', 'about.about-core')->name('about.core');
     Route::get('/staff', 'Users\StaffListController@index')->name('staff');
-});
-
-Route::get('/test', function () {
-    Auth::login(User::find(1300013));
 });
 
 //Authentication
@@ -87,13 +84,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/users/changeavatar/discord', 'Community\MyCzqoController@changeAvatarDiscord')->name('users.changeavatar.discord');
         Route::get('/users/changeavatar/initials', 'Community\MyCzqoController@changeAvatarInitials')->name('users.resetavatar');
         Route::post('/users/changedisplayname', 'Community\MyCzqoController@changeDisplayName')->name('users.changedisplayname');
-        Route::get('/users/defaultavatar/{id}', function ($id) {
-            $user = \App\User::whereId($id)->firstOrFail();
-            if ($user->isAvatarDefault()) {
-                return true;
-            }
-            return false;
-        });
 
         //CTP
         //Route::post('/dashboard/ctp/signup/post', 'DashboardController@ctpSignUp')->name('ctp.signup.post');
@@ -217,6 +207,7 @@ Route::group(['middleware' => 'auth'], function () {
 
                         //Instructors
                         Route::get('/instructors', 'Training\InstructingController@instructors')->name('instructing.instructors');
+                        Route::post('/instructors/add', 'Training\InstructingController@addInstructor')->name('instructing.instructors.add');
                         Route::get('/instructors/{cid}', 'Training\InstructingController@viewInstructor')->name('instructing.instructors.view');
                     });
                 });
@@ -237,11 +228,17 @@ Route::group(['middleware' => 'auth'], function () {
 
             //Publications
             Route::prefix('publications')->group(function () {
-                Route::group(['middleware' => ['permission:edit atc resources|edit policies']], function () {
+                Route::group(['middleware' => ['permission:edit policies']], function () {
                     Route::get('/policies', 'Publications\PublicationsController@adminPolicies')->name('publications.policies');
                     Route::post('/policies/create', 'Publications\PublicationsController@createPolicyPost')->name('publications.policies.create.post')->middleware('can:edit policies');
                     Route::post('/policies/{id}/edit', 'Publications\PublicationsController@editPolicyPost')->name('publications.policies.edit.post')->middleware('can:edit policies');
                     Route::get('/policies/{id}/delete', 'Publications\PublicationsController@deletePolicy')->name('publications.policies.delete')->middleware('can:edit policies');
+                });
+                Route::group(['middleware' => ['permission:edit atc resources']], function () {
+                    Route::get('/atc-resources', 'Publications\PublicationsController@adminAtcResources')->name('publications.atc-resources');
+                    Route::post('/atc-resources/create', 'Publications\PublicationsController@createAtcResourcePost')->name('publications.atc-resources.create.post')->middleware('can:edit atc resources');
+                    Route::post('/atc-resources/{id}/edit', 'Publications\PublicationsController@editAtcResourcePost')->name('publications.atc-resources.edit.post')->middleware('can:edit atc resources');
+                    Route::get('/atc-resources/{id}/delete', 'Publications\PublicationsController@deleteAtcResource')->name('publications.atc-resources.delete')->middleware('can:edit atc resources');
                 });
             });
 
