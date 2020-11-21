@@ -165,6 +165,7 @@ return [
         MisterPhilip\MaintenanceMode\MaintenanceCommandServiceProvider::class,
         NotificationChannels\Discord\DiscordServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
+        Sichikawa\LaravelSendgridDriver\SendgridTransportServiceProvider::class
         /*
          * Application Service Providers...
          */
