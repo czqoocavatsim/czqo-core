@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $link
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Users\User $user
+ * @property-read \App\Models\Users\UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserNotification query()
@@ -38,10 +38,10 @@ class UserNotification extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
-    public static function send(User $user, $content, $link)
+    public static function send(UserAccount $user, $content, $link)
     {
         $notification = new self();
         $notification->content = $content;

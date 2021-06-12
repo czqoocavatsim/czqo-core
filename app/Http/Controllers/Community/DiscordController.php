@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Community;
 
 use App\Http\Controllers\Controller;
+use App\Libraries\DiscordLibrary;
 use App\Models\Community\Discord\DiscordBan;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Notifications\Discord\BanNotification;
 use App\Notifications\Discord\DiscordWelcome;
 use Carbon\Carbon;
@@ -25,52 +26,6 @@ class DiscordController extends Controller
     public function joinShortcut()
     {
         return redirect()->route('index', ['discord' => '1']);
-    }
-
-    public function createDiscordBan(Request $request)
-    {
-        //Define validator messages
-        $messages = [
-            'reason.required'     => 'Please provide a ban reason.',
-            'start_time.required' => 'Please provide a ban start time',
-        ];
-
-        //Validate
-        $validator = Validator::make($request->all(), [
-            'reason'     => 'required',
-            'start_time' => 'required',
-            'user_id'    => 'required',
-        ], $messages);
-
-        //Redirect if fails
-        if ($validator->fails()) {
-            dd($validator->errors());
-
-            return redirect()->back()->withInput()->withErrors($validator, 'createDiscordBanErrors');
-        }
-
-        //Create discord client
-        $discord = new DiscordClient(['token' => config('services.discord.token')]);
-
-        //Get the user object
-        $user = User::whereId($request->get('user_id'))->first();
-
-        //Create the ban
-        $ban = new DiscordBan([
-            'user_id'      => $user->id,
-            'moderator_id' => Auth::id(),
-            'reason'       => $request->get('reason'),
-            'start_time'   => $request->get('start_time'),
-            'end_time'     => $request->get('end_time'),
-            'discord_id'   => $user->discord_user_id,
-        ]);
-
-        $ban->save();
-
-        //Notify user via bot and email
-        $user->notify(new BanNotification($user, $ban), [DiscordChannel::class, 'mail']);
-
-        dd($ban);
     }
 
     /*
@@ -108,7 +63,7 @@ class DiscordController extends Controller
         $user = Auth::user();
 
         //Duplicate?
-        if (User::where('discord_user_id', $discordAccount->id)->first()) {
+        if (UserAccount::where('discord_user_id', $discordAccount->id)->first()) {
             return redirect()->route('my.index')->with('error-modal', 'This Discord account has already been linked by another user.');
         }
 
@@ -127,23 +82,15 @@ class DiscordController extends Controller
 
     public function unlinkDiscord()
     {
-        //Create discord client
-        $discord = new DiscordClient(['token' => config('services.discord.token')]);
-
-        //Get user
-        $user = Auth::user();
-
+        $user = auth()->user();
         //If they're a member of the Discord, and not a staff member
-        if ($user->memberOfCzqoGuild() && !$user->staffProfile) {
+        if ($user->member_of_discord_guild && !$user->staffProfile) {
             //In case of an unauthorised response
             try {
                 //Remove member
-                $discord->guild->removeGuildMember(['guild.id' => 479250337048297483, 'user.id' => $user->discord_user_id]);
+                (new DiscordLibrary)->kick($user);
                 //Log
-                $discord->channel->createMessage([
-                    'channel.id' => 482860026831175690,
-                    'content'    => '['.Carbon::now()->toDateTimeString().'] <@'.$user->discord_user_id.'> ('.Auth::id().') unlinked account, removed from guild',
-                ]);
+
             } catch (Throwable $ex) {
                 Log::error($ex);
             }
@@ -222,7 +169,7 @@ class DiscordController extends Controller
             'guild.id'     => intval(config('services.discord.guild_id')),
             'user.id'      => $user->discord_user_id,
             'access_token' => $discordAccount->token,
-            'nick'         => $user->fullName('FLC'),
+            'nick'         => $user->full_name_cid,
             'roles'        => $rolesToAdd,
         ];
 

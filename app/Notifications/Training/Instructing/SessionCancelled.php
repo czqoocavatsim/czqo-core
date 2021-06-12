@@ -48,16 +48,16 @@ class SessionCancelled extends Notification
         if ($this->type == 'training') {
             return (new MailMessage())
                 ->subject('Training Session Cancelled')
-                ->greeting("Hi {$this->session->student->user->fullName('F')},")
-                ->line("{$this->session->instructor->user->fullName('FL')} has cancelled your upcoming training session.")
+                ->greeting("Hi {$this->session->student->user->fname},")
+                ->line("{$this->session->instructor->user->full_name} has cancelled your upcoming training session.")
                 ->line('If you have any questions, please contact your Instructor.')
                 ->action('View Session', '')
                 ->salutation('Gander Oceanic OCA');
         } elseif ($this->type == 'ots') {
             return (new MailMessage())
                 ->subject('OTS Session Cancelled')
-                ->greeting("Hi {$this->session->student->user->fullName('F')},")
-                ->line("{$this->session->instructor->user->fullName('FL')} has cancelled your upcoming OTS session.")
+                ->greeting("Hi {$this->session->student->user->fname},")
+                ->line("{$this->session->instructor->user->full_name} has cancelled your upcoming OTS session.")
                 ->line('If you have any questions, please contact your Assessor.')
                 ->action('View Session', '')
                 ->salutation('Gander Oceanic OCA');
@@ -77,7 +77,7 @@ class SessionCancelled extends Notification
         if ($this->type == 'training') {
             $message->embed([
                 'title'       => 'Training Session Cancelled',
-                'description' => "{$this->session->instructor->user->fullName('FL')} has cancelled your upcoming training session. If you have any questions, please contact your Instructor.",
+                'description' => "{$this->session->instructor->user->full_name} has cancelled your upcoming training session. If you have any questions, please contact your Instructor.",
                 'color'       => 0x80c9,
                 'timestamp'   => Carbon::now(),
                 'footer'      => [
@@ -87,7 +87,7 @@ class SessionCancelled extends Notification
         } elseif ($this->type == 'ots') {
             $message->embed([
                 'title'       => 'OTS Session Cancelled',
-                'description' => "{$this->session->instructor->user->fullName('FL')} has cancelled your upcoming OTS session. If you have any questions, please contact your Assessor.",
+                'description' => "{$this->session->instructor->user->full_name} has cancelled your upcoming OTS session. If you have any questions, please contact your Assessor.",
                 'color'       => 0x80c9,
                 'timestamp'   => Carbon::now(),
                 'footer'      => [

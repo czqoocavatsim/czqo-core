@@ -20,7 +20,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int|null $group_id
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\Users\User $user
+ * @property-read \App\Models\Users\UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|StaffMember newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StaffMember newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|StaffMember query()
@@ -53,11 +53,11 @@ class StaffMember extends Model
     /**
      * Returns the user associated with the staff member.
      *
-     * @return User
+     * @return UserAccount
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     /**
@@ -73,10 +73,10 @@ class StaffMember extends Model
     /**
      * Assign a user (person) to the position.
      *
-     * @param User $user
+     * @param UserAccount $user
      * @return void
      */
-    public function assignUser(User $assignedUser)
+    public function assignUser(UserAccount $assignedUser)
     {
         //Assign
         $this->user = $assignedUser;

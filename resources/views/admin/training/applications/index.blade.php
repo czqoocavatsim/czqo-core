@@ -12,7 +12,7 @@
                 #{{$a->reference_id}}
             </h5>
             <p class="m-0">
-                {{$a->user->fullName('FLC')}}
+                {{$a->user->full_name_cid}}
                 <br>
                 Submitted <span title="{{$a->created_at}}">{{$a->created_at->diffForHumans()}}</span>
             </p>

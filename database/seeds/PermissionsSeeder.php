@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -127,7 +127,7 @@ class PermissionsSeeder extends Seeder
         );
 
         //Give the bot users the roles they deserve!
-        User::find(1)->assignRole('Administrator');
-        User::find(2)->assignRole('Administrator');
+        UserAccount::find(1)->assignRole('Administrator');
+        UserAccount::find(2)->assignRole('Administrator');
     }
 }

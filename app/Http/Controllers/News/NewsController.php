@@ -11,7 +11,7 @@ use App\Models\Publications\MeetingMinutes;
 use App\Models\Publications\UploadedImage;
 use App\Models\Settings\AuditLogEntry;
 use App\Models\Users\StaffMember;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -179,7 +179,7 @@ class NewsController extends Controller
     public function minutesDelete($id)
     {
         $minutes = MeetingMinutes::whereId($id)->firstOrFail();
-        AuditLogEntry::insert(Auth::user(), 'Deleted meeting minutes '.$minutes->title, User::find(1), 0);
+        AuditLogEntry::insert(Auth::user(), 'Deleted meeting minutes '.$minutes->title, UserAccount::find(1), 0);
         $minutes->delete();
 
         return redirect()->back()->with('info', 'Deleted item');
@@ -210,7 +210,7 @@ class NewsController extends Controller
 
         $minutes->save();
 
-        AuditLogEntry::insert(Auth::user(), 'Uploaded meeting minutes '.$minutes->title, User::find(1), 0);
+        AuditLogEntry::insert(Auth::user(), 'Uploaded meeting minutes '.$minutes->title, UserAccount::find(1), 0);
 
         return redirect()->back()->with('success', 'Minutes uploaded!');
     }

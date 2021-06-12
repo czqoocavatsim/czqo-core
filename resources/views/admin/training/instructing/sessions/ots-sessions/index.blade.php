@@ -14,7 +14,7 @@
                 <div class="d-flex flex-row w-100 align-items-center h-100">
                     <img src="{{$s->student->user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
                     <div class="d-flex flex-column h-100">
-                        <h5 class="mb-1">{{$s->student->user->fullName('FLC')}}</h5>
+                        <h5 class="mb-1">{{$s->student->user->full_name_cid}}</h5>
                         {{$s->scheduled_time->toDayDateTimeString()}} UTC
                     </div>
                 </div>
@@ -34,8 +34,8 @@
     <tbody>
         @foreach ($sessions as $s)
             <tr>
-                <td>{{$s->student->user->fullName('FLC')}}</td>
-                <td>{{$s->instructor->user->fullName('FLC')}}</td>
+                <td>{{$s->student->user->full_name_cid}}</td>
+                <td>{{$s->instructor->user->full_name_cid}}</td>
                 <td data-sort="{{ $s->scheduled_time }}">{{$s->scheduled_time->toDayDateTimeString()}} UTC</td>
                 <td>
                     <a class="blue-text" href="{{route('training.admin.instructing.ots-sessions.view', $s->id)}}">
@@ -85,7 +85,7 @@
                         <select required name="student_id" id="" class="form-control">
                             <option hidden>Please select one...</option>
                             @foreach(Auth::user()->instructorProfile->studentsAssigned as $student)
-                            <option value="{{$student->student->id}}">{{$student->student->user->fullName('FLC')}} @foreach($student->student->labels as $label) - {{$label->label()->name}} @endforeach</option>
+                            <option value="{{$student->student->id}}">{{$student->student->user->full_name_cid}} @foreach($student->student->labels as $label) - {{$label->label()->name}} @endforeach</option>
                             @endforeach
                         </select>
                     </div>

@@ -46,8 +46,8 @@ class SoloCertExpiringStaff extends Notification
             ->greeting('Hi there,')
             ->line('A solo certification is about to expire.')
             ->line("Expiry: {$this->cert->expires->toFormattedDateString()}")
-            ->line("Granted by: {$this->cert->instructor->fullName('FLC')}")
-            ->line("Student: {$this->cert->rosterMember->user->fullName('FLC')}")
+            ->line("Granted by: {$this->cert->instructor->full_name_cid}")
+            ->line("Student: {$this->cert->rosterMember->user->full_name_cid}")
             ->salutation('Gander Oceanic OCA');
     }
 

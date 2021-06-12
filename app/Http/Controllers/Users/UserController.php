@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Users;
 use App\Http\Controllers\Controller;
 use App\Models\ControllerBookings\ControllerBookingsBan;
 use App\Models\Settings\AuditLogEntry;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Models\Users\UserNote;
 use App\Models\Users\UserNotification;
 use App\Notifications\Discord\DiscordWelcome;
@@ -49,7 +49,7 @@ class UserController extends Controller
             return redirect()->route('index');
         }
         Auth::logout($user);
-        AuditLogEntry::insert(User::find(1), 'User '.$user->fullName('FLC').' denied privacy policy - account deleted', User::find(1), 0);
+        AuditLogEntry::insert(UserAccount::find(1), 'User '.$user->full_name_cid.' denied privacy policy - account deleted', UserAccount::find(1), 0);
         $user->delete();
 
         return redirect()->route('index')->with('info', 'Your account has been removed as you have not accepted the privacy policy.');
@@ -57,14 +57,14 @@ class UserController extends Controller
 
     public function viewAllUsers()
     {
-        $users = User::all()->sortBy('id');
+        $users = UserAccount::all()->sortBy('id');
 
         return view('admin.users.index', compact('users'));
     }
 
     public function viewUserProfile($id)
     {
-        $user = User::where('id', $id)->firstOrFail();
+        $user = UserAccount::where('id', $id)->firstOrFail();
         $assignableRoles = Role::all();
         $assignablePermissions = Permission::all();
 
@@ -73,7 +73,7 @@ class UserController extends Controller
 
     public function deleteUser($id)
     {
-        $user = User::where('id', $id)->firstOrFail();
+        $user = UserAccount::where('id', $id)->firstOrFail();
         if ($user->id == Auth::user()->id) {
             abort(403, 'You cannot delete yourself you fucking idiot.');
         }
@@ -100,7 +100,7 @@ class UserController extends Controller
 
     public function editUser($id)
     {
-        $user = User::where('id', $id)->firstOrFail();
+        $user = UserAccount::where('id', $id)->firstOrFail();
 
         //return view('admin.users.edituser', compact('user'));
         abort(404, 'Not implemented');
@@ -113,7 +113,7 @@ class UserController extends Controller
             'user_id' => 'required',
         ]);
         $editUser = Auth::user();
-        $user = User::whereId($request->get('user_id'))->firstOrFail();
+        $user = UserAccount::whereId($request->get('user_id'))->firstOrFail();
         $uploadedFile = $request->file('file');
         $filename = $uploadedFile->getClientOriginalName();
         Storage::disk('local')->putFileAs(
@@ -135,7 +135,7 @@ class UserController extends Controller
             'user_id' => 'required',
         ]);
         $editUser = Auth::user();
-        $user = User::whereId($request->get('user_id'))->firstOrFail();
+        $user = UserAccount::whereId($request->get('user_id'))->firstOrFail();
         if ($user->isAvatarDefault()) {
             abort(403, 'The avatar is already the default avatar.');
         }
@@ -155,7 +155,7 @@ class UserController extends Controller
         ]);
 
         $editUser = Auth::user();
-        $user = User::whereId($request->get('user_id'))->firstOrFail();
+        $user = UserAccount::whereId($request->get('user_id'))->firstOrFail();
 
         $user->bio = null;
         $user->save();
@@ -168,7 +168,7 @@ class UserController extends Controller
 
     public function storeEditUser(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = UserAccount::find($id);
         $prevPermissions = $user->permissions;
         $user->permissions = $request->get('permissions');
         $user->save();
@@ -196,7 +196,7 @@ class UserController extends Controller
 
     public function emailCreate($id)
     {
-        $user = User::where('id', $id)->firstOrFail();
+        $user = UserAccount::where('id', $id)->firstOrFail();
 
         //return view('dashboard.users.email', compact('user'));
         abort(404, 'Not implemented');
@@ -212,7 +212,7 @@ class UserController extends Controller
             'content' => 'required',
         ]);
 
-        $user = User::where('id', $id)->firstOrFail();
+        $user = UserAccount::where('id', $id)->firstOrFail();
         $note = new UserNote([
             'user_id'   => $user->id,
             'author'    => Auth::user()->id,
@@ -232,7 +232,7 @@ class UserController extends Controller
 
     public function deleteUserNote($user_id, $note_id)
     {
-        $user = User::where('id', $user_id)->firstOrFail();
+        $user = UserAccount::where('id', $user_id)->firstOrFail();
         $note = UserNote::where('id', $note_id)->where('user_id', $user->id)->firstOrFail();
 
         $entry = new AuditLogEntry([
@@ -285,7 +285,7 @@ class UserController extends Controller
         $user = Auth::user();
 
         //They need Discord don't they
-        if (!$user->hasDiscord()) {
+        if (!$user->discord_linked) {
             return redirect()->route('my.index')->with('error-modal', 'You must link your Discord account must.');
         }
 
@@ -316,7 +316,7 @@ class UserController extends Controller
             abort(400, 'AJAX requests only');
         }
         $query = strtolower($request->get('query'));
-        $users = User::
+        $users = UserAccount::
             where('id', 'LIKE', "%{$query}%")->
             orWhere('display_fname', 'LIKE', "%{$query}")->
             orWhere('lname', 'LIKE', "%{$query}%")->get();
@@ -372,7 +372,7 @@ class UserController extends Controller
 
     public function viewUserProfilePublic($id)
     {
-        $user = User::whereId($id)->firstOrFail();
+        $user = UserAccount::whereId($id)->firstOrFail();
 
         return view('dashboard.me.publicuserprofile', compact('user'));
     }
@@ -383,7 +383,7 @@ class UserController extends Controller
         $this->validate($request, [
             'reason' => 'required',
         ]);
-        $user = User::whereId($id)->firstOrFail();
+        $user = UserAccount::whereId($id)->firstOrFail();
 
         //Is the user banned?
         if ($user->bookingBan()) {
@@ -392,7 +392,7 @@ class UserController extends Controller
 
         //No... let's create a ban
         $ban = new ControllerBookingsBan();
-        $ban->reason = $request->get(Auth::user()->fullName('FLC').' at '.date('Y-m-d H:i:s').' '.$request->get('reason'));
+        $ban->reason = $request->get(Auth::user()->full_name_cid.' at '.date('Y-m-d H:i:s').' '.$request->get('reason'));
         $ban->user_id = $user->id;
         $ban->timestamp = date('Y-m-d H:i:s');
         $ban->save();
@@ -416,7 +416,7 @@ class UserController extends Controller
             abort(403, 'Discord OAuth failed.');
         }
         $user = Auth::user();
-        if (User::where('discord_user_id', $discordUser->id)->first()) {
+        if (UserAccount::where('discord_user_id', $discordUser->id)->first()) {
             return redirect()->route('my.index')->with('error-modal', 'This Discord account has already been linked by another user.');
         }
         $user->discord_user_id = $discordUser->id;
@@ -442,7 +442,7 @@ class UserController extends Controller
             'guild.id'     => 479250337048297483,
             'user.id'      => intval($discordUser->id),
             'access_token' => $discordUser->token,
-            'nick'         => Auth::user()->fullName('FLC'),
+            'nick'         => Auth::user()->full_name_cid,
         ]; /*
         if (Auth::user()->rosterProfile) {
             if (Auth::user()->rosterProfile->status == 'training') {
@@ -466,7 +466,7 @@ class UserController extends Controller
     {
         $discord = new DiscordClient(['token' => config('services.discord.token')]);
         $user = Auth::user();
-        if ($user->memberOfCzqoGuild() && !$user->staffProfile) {
+        if ($user->member_of_discord_guild && !$user->staffProfile) {
             try {
                 $discord->guild->removeGuildMember(['guild.id' => 479250337048297483, 'user.id' => $user->discord_user_id]);
                 $discord->channel->createMessage(['channel.id' => 482860026831175690, 'content' => '<@'.$user->discord_user_id.'> ('.Auth::id().') has unlinked their account and has been kicked.']);

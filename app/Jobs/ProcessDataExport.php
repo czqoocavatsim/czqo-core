@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Notifications\DataExportRequest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -36,10 +36,10 @@ class ProcessDataExport implements ShouldQueue
      */
     public function handle()
     {
-        $user = User::whereId($this->user->id)->with(['applications', 'staffProfile', 'rosterProfile', 'instructorProfile', 'studentProfile'])->firstOrFail();
+        $user = UserAccount::whereId($this->user->id)->with(['applications', 'staffProfile', 'rosterProfile', 'instructorProfile', 'studentProfile'])->firstOrFail();
         $userArray = $user->toArray();
         $discord = null;
-        if ($user->hasDiscord()) {
+        if ($user->discord_linked) {
             $discord = $user->getDiscordUser();
         }
         array_push($userArray, $discord);

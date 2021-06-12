@@ -7,7 +7,7 @@ use App\Models\Events\ControllerApplication;
 use App\Models\Events\Event;
 use App\Models\Events\EventUpdate;
 use App\Models\Publications\UploadedImage;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Notifications\Events\NewControllerSignUp;
 use Auth;
 use Carbon\Carbon;
@@ -81,7 +81,7 @@ class EventController extends Controller
             'channel.id' => intval(config('services.discord.marketing')),
             'content'    => 'A controller has signed up to control for '.$application->event->name,
             'embed'      => [
-                'title'     => $application->user->fullName('FLC'),
+                'title'     => $application->user->full_name_cid,
                 'url'       => route('events.admin.view', $application->event->slug),
                 'timestamp' => date('Y-m-d H:i:s'),
                 'color'     => hexdec('2196f3'),
@@ -357,7 +357,7 @@ class EventController extends Controller
                     'url'         => route('events.view', $update->event->slug),
                     'timestamp'   => date('Y-m-d H:i:s'),
                     'author'      => [
-                        'name' => $update->user->fullName('FLC'),
+                        'name' => $update->user->full_name_cid,
                     ],
                 ],
             ]);

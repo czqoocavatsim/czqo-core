@@ -2,7 +2,7 @@
 
 namespace App\Models\Events;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,7 +35,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read int|null $controller_applications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Events\EventUpdate[] $updates
  * @property-read int|null $updates_count
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|Event newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Event newQuery()
  * @method static \Illuminate\Database\Query\Builder|Event onlyTrashed()
@@ -76,7 +76,7 @@ class Event extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function updates()

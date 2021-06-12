@@ -46,7 +46,7 @@ class ApplicationAcceptedApplicant extends Notification
     {
         return (new MailMessage())
         ->subject('Your Application Has Been Accepted!')
-        ->greeting("Hello {$this->application->user->fullName('FLC')},")
+        ->greeting("Hello {$this->application->user->full_name_cid},")
         ->line('Congratulations! Your application for Gander Oceanic has been accepted. You can now take the next steps to achieving your oceanic certification.')
         ->line('**How to get started**')
         ->line('To begin your training, head to the Training Portal in myCZQO and submit your availability for the next two weeks. This will allow us to assign you an Instructor who is best suited to your time zone.')

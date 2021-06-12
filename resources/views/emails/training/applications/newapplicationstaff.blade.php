@@ -3,10 +3,10 @@
 @section('to-line', 'Hi,')
 
 @section('message-content')
-<p>{{$application->user->fullName('FLC')}} has applied for Gander Oceanic.</p>
+<p>{{$application->user->full_name_cid}} has applied for Gander Oceanic.</p>
 <ul>
     <li>Reference ID: {{$application->reference_id}}</li>
-    <li>Name: {{$application->user->fullName('FLC')}}</li>
+    <li>Name: {{$application->user->full_name_cid}}</li>
     <li>Rating/Division: {{$application->user->rating_GRP}}/{{$application->user->division_name}}</li>
 </ul>
 <b>Applicant Statement</b>

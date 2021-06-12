@@ -2,7 +2,7 @@
 
 namespace App\Models\Training;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\HtmlString;
@@ -20,7 +20,7 @@ use Parsedown;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Training\Application $application
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|ApplicationUpdate newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ApplicationUpdate newQuery()
  * @method static \Illuminate\Database\Query\Builder|ApplicationUpdate onlyTrashed()
@@ -49,7 +49,7 @@ class ApplicationUpdate extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function updateContentHtml()

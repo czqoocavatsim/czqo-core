@@ -43,7 +43,7 @@ class ResponseReceived extends Notification
     {
         return (new MailMessage())
                     ->subject("Response to {$this->response->page->name}")
-                    ->line("{$this->response->user->fullName('FLC')} has responded to the form on {$this->response->page->name}:")
+                    ->line("{$this->response->user->full_name_cid} has responded to the form on {$this->response->page->name}:")
                     ->line("\"{$this->response->content}\"")
                     ->action('View All Responses', 'google.com')
                     ->salutation('Gander Oceanic OCA');

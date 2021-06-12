@@ -23,9 +23,9 @@
                             <div class="d-flex flex-row justify-content-between">
                                 <select class="custom-select disabled" value="{{$article->user_id}}" name="author">
                                     @foreach ($staff as $s)
-                                        <option value="{{$s->user->id}}">{{$s->user->fullName('FLC')}} ({{$s->position}})</option>
+                                        <option value="{{$s->user->id}}">{{$s->user->full_name_cid}} ({{$s->position}})</option>
                                     @endforeach
-                                    <option value="{{$article->user_id}}">{{$article->user->fullName('FLC')}}</option>
+                                    <option value="{{$article->user_id}}">{{$article->user->full_name_cid}}</option>
                                 </select>
                                 <div class="ml-3">
                                     <input type="checkbox" disabled name="showAuthor" class="" id="defaultUnchecked">

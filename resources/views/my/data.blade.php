@@ -15,7 +15,7 @@
                     <h4 class="font-weight-bold blue-text">Account Information</h4>
                     <ul class="list-unstyled">
                         <li>
-                            <span class="font-weight-bold">First Name (Display): </span> {{Auth::user()->fullName('F')}}
+                            <span class="font-weight-bold">First Name (Display): </span> {{Auth::user()->fname}}
                         </li>
                         <li>
                             <span class="font-weight-bold">First Name (CERT): </span> {{Auth::user()->fname}}
@@ -47,7 +47,7 @@
                         </li>
                         @endif
                         <li class="mt-3">
-                            <span class="font-weight-bold">Role: </span> {{Auth::user()->highestRole()->name}}
+                            <span class="font-weight-bold">Role: </span> {{Auth::user()->highest_role->name}}
                         </li>
                         @if(Auth::user()->staffProfile)
                         <li>

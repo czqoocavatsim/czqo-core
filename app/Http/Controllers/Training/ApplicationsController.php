@@ -431,7 +431,7 @@ class ApplicationsController extends Controller
         $student->user->assignRole('Student');
 
         //Give Discord role
-        if ($student->user->hasDiscord() && $student->user->memberOfCzqoGuild()) {
+        if ($student->user->discord_linked && $student->user->member_of_discord_guild) {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
 

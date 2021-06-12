@@ -7,7 +7,7 @@ use App\Models\Network\SessionLog;
 use App\Models\News\HomeNewControllerCert;
 use App\Models\Roster\RosterMember;
 use App\Models\Roster\SoloCertification;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Notifications\Roster\RemovedFromRoster;
 use App\Notifications\Roster\RosterStatusChanged;
 use Carbon\Carbon;
@@ -81,7 +81,7 @@ class RosterController extends Controller
         $rosterMember->remarks = $request->get('remarks');
 
         //User associated
-        $user = User::whereId($request->get('cid'))->first();
+        $user = UserAccount::whereId($request->get('cid'))->first();
         if ($user) {
             $rosterMember->user_id = $user->id;
         } else {
@@ -103,7 +103,7 @@ class RosterController extends Controller
         }
 
         //Give Discord role
-        if ($rosterMember->user->hasDiscord() && $rosterMember->user->memberOfCzqoGuild()) {
+        if ($rosterMember->user->discord_linked && $rosterMember->user->member_of_discord_guild) {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
 
@@ -185,7 +185,7 @@ class RosterController extends Controller
         $user->removeRole('Student');
 
         //Give Discord role
-        if ($rosterMember->user->hasDiscord() && $rosterMember->user->memberOfCzqoGuild()) {
+        if ($rosterMember->user->discord_linked && $rosterMember->user->member_of_discord_guild) {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
 
@@ -247,7 +247,7 @@ class RosterController extends Controller
         $rosterMember->remarks = $request->get('remarks');
 
         //User
-        $user = User::whereId($rosterMember->user->id)->first();
+        $user = UserAccount::whereId($rosterMember->user->id)->first();
 
         //Date certified
         switch ($request->get('certification')) {
@@ -264,7 +264,7 @@ class RosterController extends Controller
         }
 
         //Give Discord role
-        if ($rosterMember->user->hasDiscord() && $rosterMember->user->memberOfCzqoGuild()) {
+        if ($rosterMember->user->discord_linked && $rosterMember->user->member_of_discord_guild) {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
 
@@ -339,7 +339,7 @@ class RosterController extends Controller
             foreach ($roster as $r) {
                 fputcsv($file, [
                     $r->cid,
-                    $r->user->fullName('FL'),
+                    $r->user->full_name,
                     $r->user->ratings_short,
                     $r->user->division_code,
                     $r->certification,
@@ -394,7 +394,7 @@ class RosterController extends Controller
         }
 
         //See if the controller exists
-        if (!User::whereId($request->get('cid'))->first()) {
+        if (!UserAccount::whereId($request->get('cid'))->first()) {
             return response()->json(['message' => 'No such user found'], 400);
         }
 

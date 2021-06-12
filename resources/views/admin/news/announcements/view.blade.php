@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Sent by</label>
-                            <p>{{$announcement->user->fullName('FLC')}}</p>
+                            <p>{{$announcement->user->full_name_cid}}</p>
                         </div>
                     </div>
                 </li>

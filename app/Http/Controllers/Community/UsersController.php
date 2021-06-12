@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Community;
 
 use App\Http\Controllers\Controller;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +20,7 @@ class UsersController extends Controller
     public function index()
     {
         //Get all users
-        $users = User::all();
+        $users = UserAccount::all();
 
         //Get cool stats for the page
         $userCount = count($users) - 2;
@@ -31,7 +31,7 @@ class UsersController extends Controller
     public function viewUser($id)
     {
         //Get user
-        $user = User::whereId($id)->firstOrFail();
+        $user = UserAccount::whereId($id)->firstOrFail();
 
         //Get assignable roles/perms
         $assignableRoles = Role::all();
@@ -53,7 +53,7 @@ class UsersController extends Controller
         }
 
         //Find the role and user
-        $user = User::whereId($user_id)->firstOrFail();
+        $user = UserAccount::whereId($user_id)->firstOrFail();
         $role = Role::whereId($request->get('role_id'))->first();
 
         //No role? Bad.
@@ -94,7 +94,7 @@ class UsersController extends Controller
         }
 
         //Find the role and user
-        $user = User::whereId($user_id)->firstOrFail();
+        $user = UserAccount::whereId($user_id)->firstOrFail();
         $role = Role::whereId($request->get('role_id'))->first();
 
         //No role? Bad.
@@ -130,7 +130,7 @@ class UsersController extends Controller
         }
 
         //Find the role and user
-        $user = User::whereId($user_id)->firstOrFail();
+        $user = UserAccount::whereId($user_id)->firstOrFail();
         $permission = Permission::whereId($request->get('permission_id'))->first();
 
         //No permission? Bad.
@@ -166,7 +166,7 @@ class UsersController extends Controller
         }
 
         //Find the role and user
-        $user = User::whereId($user_id)->firstOrFail();
+        $user = UserAccount::whereId($user_id)->firstOrFail();
         $permission = Permission::whereId($request->get('permission_id'))->first();
 
         //No permission? Bad.
@@ -192,7 +192,7 @@ class UsersController extends Controller
     public function resetUserBiography($user_id)
     {
         //Get user
-        $user = User::whereId($user_id)->firstOrFail();
+        $user = UserAccount::whereId($user_id)->firstOrFail();
 
         //Reset their biography
         $user->bio = null;
@@ -208,7 +208,7 @@ class UsersController extends Controller
     public function resetUserAvatar($user_id)
     {
         //Get user
-        $user = User::whereId($user_id)->firstOrFail();
+        $user = UserAccount::whereId($user_id)->firstOrFail();
 
         //Reset their avatar
         $user->avatar = '';

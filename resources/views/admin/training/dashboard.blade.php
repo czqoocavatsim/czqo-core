@@ -1,7 +1,7 @@
 @extends('admin.training.layouts.main')
 @section('title', 'Dashboard - Training - ')
 @section('training-content')
-<h1 class="blue-text mb-2 font-weight-bold"><span id="greeting">Hello</span>, {{Auth::user()->fullName('F')}}!</h1>
+<h1 class="blue-text mb-2 font-weight-bold"><span id="greeting">Hello</span>, {{Auth::user()->fname}}!</h1>
 <p class="lead mb-4 fw-500">@if(Auth::user()->instructorProfile && Auth::user()->instructorProfile->current)You are a <span class="blue-text">{{Auth::user()->instructorProfile->staffPageTagline()}}</span> with <span class="blue-text">{{count(Auth::user()->instructorProfile->studentsAssigned)}}</span> students assigned to you.@else Welcome. @endif</p>
 <div class="row">
     @can('view applications')
@@ -16,7 +16,7 @@
                         <a href="{{route('training.admin.applications.view', $a->reference_id)}}" class="list-group-item waves-effect list-group-item-action">
                             <div class="d-flex flex-row w-100 justify-content-between align-items-center">
                                 <div>
-                                    <h5>{{$a->user->fullName('FLC')}}</h5>
+                                    <h5>{{$a->user->full_name_cid}}</h5>
                                     <p class="mb-0">Submitted {{$a->created_at->diffForHumans()}}</p>
                                 </div>
                                 <i style="font-size: 1.6em;" class="blue-text fas fa-chevron-right fa-fw"></i>
@@ -44,7 +44,7 @@
                         <a href="{{route('training.admin.instructing.students.view', $s->user->id)}}" class="list-group-item rounded waves-effect list-group-item-action">
                             <div class="d-flex flex-row w-100 justify-content-between align-items-center">
                                 <div>
-                                    <h5>{{$s->created_at->format('d M')}} - {{$s->user->fullName('FLC')}}</h5>
+                                    <h5>{{$s->created_at->format('d M')}} - {{$s->user->full_name_cid}}</h5>
                                     <p class="mb-0">Waiting for {{$s->created_at->diffInDays()}} days</p>
                                 </div>
                                 <i style="font-size: 1.6em;" class="blue-text fas fa-chevron-right fa-fw"></i>

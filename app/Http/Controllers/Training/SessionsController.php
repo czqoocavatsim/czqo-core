@@ -88,12 +88,12 @@ class SessionsController extends Controller
                 'fields'    => [
                     [
                         'name'   => 'Student',
-                        'value'  => $session->student->user->fullName('FLC'),
+                        'value'  => $session->student->user->full_name_cid,
                         'inline' => false,
                     ],
                     [
                         'name'   => 'Instructor',
-                        'value'  => $session->instructor->user->fullName('FLC'),
+                        'value'  => $session->instructor->user->full_name_cid,
                         'inline' => false,
                     ],
                 ],
@@ -318,12 +318,12 @@ class SessionsController extends Controller
                 'fields'    => [
                     [
                         'name'   => 'Student',
-                        'value'  => $session->student->user->fullName('FLC'),
+                        'value'  => $session->student->user->full_name_cid,
                         'inline' => false,
                     ],
                     [
                         'name'   => 'Instructor',
-                        'value'  => $session->instructor->user->fullName('FLC'),
+                        'value'  => $session->instructor->user->full_name_cid,
                         'inline' => false,
                     ],
                 ],

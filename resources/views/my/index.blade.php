@@ -34,7 +34,7 @@
                     //echo greeting
                     echo (randomArrayVar($greeting));
                     ?>
-                    {{Auth::user()->fullName('F')}}!
+                    {{ auth()->user()->fname }}!
                 </h1>
                 @if(isset($quote))
                 <p style="font-size: 1.2em;">{{$quote->contents->quotes[0]->quote}} ~ {{$quote->contents->quotes[0]->author}}</p>
@@ -69,7 +69,7 @@
                     <li class="w-100">
                         <div class="d-flex h-100 flex-row justify-content-left align-items-center">
                             <i style="font-size: 1.6em; margin-right: 10px;" class="fas fa-user-circle fa-fw"></i>
-                            <span style="font-size: 1.1em;">{{Auth::user()->fullName('F')}}</span>
+                            <span style="font-size: 1.1em;">{{ Auth::user()->fname }}</span>
                         </div>
                     </li>
                 </a>
@@ -180,18 +180,18 @@
                             <div>
                                 <h5 class="card-title">
                                     <a href="" data-toggle="modal" data-target="#changeDisplayNameModal" class="text-dark text-decoration-underline fw-500">
-                                        {{ Auth::user()->fullName('FLC') }} <i style="font-size: 0.8em;" class="ml-1 far fa-edit text-muted"></i>
+                                        {{ Auth::user()->full_name_cid }} <i style="font-size: 0.8em;" class="ml-1 far fa-edit text-muted"></i>
                                     </a>
                                 </h5>
                                 <h6 class="card-subtitle mb-2 text-muted fw-500">
-                                    {{Auth::user()->rating_GRP}} ({{Auth::user()->rating_short}})
+                                    {{Auth::user()->vatsim_membership_data->rating->grp}} ({{Auth::user()->vatsim_membership_data->rating->short}})
                                 </h6>
-                                Region: {{ Auth::user()->region_name }}<br/>
-                                Division: {{ Auth::user()->division_name }}<br/>
-                                @if (Auth::user()->subdivision_name)
-                                vACC/ARTCC: {{ Auth::user()->subdivision_name }}<br/>
+                                Region: {{ Auth::user()->vatsim_membership_data->region->name }}<br/>
+                                Division: {{ Auth::user()->vatsim_membership_data->division->name }}<br/>
+                                @if (Auth::user()->vatsim_membership_data->subdivision->name)
+                                vACC/ARTCC: {{ Auth::user()->vatsim_membership_data->subdivision->name }}<br/>
                                 @endif
-                                Role: {{Auth::user()->highestRole()->name}}<br/>
+                                Role: {{Auth::user()->highest_role->name}}<br/>
                                 @if(Auth::user()->staffProfile)
                                 Staff Role: {{Auth::user()->staffProfile->position}}
                                 @endif
@@ -200,7 +200,7 @@
                         <br/>
                         <div data-step="4" data-intro="Here you can link your Discord account to receive training session reminders and to gain access to the CZQO Discord.">
                         <h3 class="mt-2 fw-600" style="font-size: 1.3em;">Discord</h3>
-                        @if (!Auth::user()->hasDiscord())
+                        @if (!Auth::user()->discord_linked)
                         <p class="mt-1">You have not linked your Discord account.</p>
                         <a href="#" data-toggle="modal" data-target="#discordModal" style="text-decoration:none;">
                             <span class="blue-text">
@@ -212,8 +212,8 @@
                             </span>
                         </a>
                         @else
-                        <p class="mt-1" style="font-size: 1.1em;"><img style="border-radius:50%; height: 30px;" class="img-fluid" src="{{Auth::user()->getDiscordAvatar()}}" alt="">&nbsp;&nbsp;{{Auth::user()->getDiscordUser()->username}}<span style="color: #d1d1d1;">#{{Auth::user()->getDiscordUser()->discriminator}}</span></p>
-                        @if(!Auth::user()->memberOfCzqoGuild())
+                        <p class="mt-1" style="font-size: 1.1em;"><img style="border-radius:50%; height: 30px;" class="img-fluid" src="{{Auth::user()->discord_profile_image}}" alt="">&nbsp;&nbsp;{{Auth::user()->discord_user->username}}<span style="color: #d1d1d1;">#{{Auth::user()->discord_user->discriminator}}</span></p>
+                        @if(!Auth::user()->member_of_discord_guild)
                         <a href="#" data-toggle="modal" data-target="#discordTopModal" style="text-decoration:none;">
                             <span class="blue-text">
                                 <i class="fas fa-chevron-right"></i>
@@ -254,17 +254,17 @@
                         </div>
                     </div>
                     <div class="col-md">
-                        @if(Auth::user()->pendingApplication())
+                        {{--@if(Auth::user()->pendingApplication())
                             <a href="{{route('training.applications.show', Auth::user()->pendingApplication()->reference_id)}}" class="list-group-item list-group-item-action p-4 z-depth-1 shadow-none mb-3">
                                 <h4 class="blue-text fw-600">You have a pending application for Gander Oceanic</h4>
                                 <p style="font-size:1.1em;" class="m-0">#{{Auth::user()->pendingApplication()->reference_id}} - submitted {{Auth::user()->pendingApplication()->created_at->diffForHumans()}}</p>
                             </a>
-                        @endif
+                        @endif--}}
                         @if ($studentProfile = Auth::user()->studentProfile && $cert = Auth::user()->studentProfile->soloCertification())
                         <div class="list-group-item rounded p-4 mb-3 z-depth-1 shadow-none">
                             <h4 class="fw-600 blue-text">{{ $cert->expires->diffInDays(Carbon\Carbon::now()) <= 2 ? 'Your solo certification is about to expire' : 'Your active solo certification'}}</h4>
                             <h6 class="fw-500">Expires: {{$cert->expires->toFormattedDateString()}} (in {{$cert->expires->diffForHumans()}})</h6>
-                            <h6 class="fw-500">Granted by: {{$cert->instructor->fullName('FL')}}</h6>
+                            <h6 class="fw-500">Granted by: {{$cert->instructor->full_name}}</h6>
                             <p class="mt-3 mb-0">{{ $cert->expires->diffInDays(Carbon\Carbon::now()) <= 2 ? 'Contact your instructor to request an extension or proceed to an OTS assessment.' : 'Your use of this solo certification is bound to our policies and VATSIM\'s GRP. Your instructor will give you more information.'}}</p>
                         </div>
                         @endif
@@ -272,14 +272,14 @@
                         <div class="list-group-item rounded p-4 mb-3 z-depth-1 shadow-none">
                             <h4 class="fw-600 blue-text">Your upcoming training session</h4>
                             <h6 class="fw-500">Scheduled for {{$session->scheduled_time->toFormattedDateString()}} (in {{$session->scheduled_time->diffForHumans()}})</h6>
-                            <h6 class="fw-500 mb-0">With {{$session->instructor->user->fullName('FL')}}</h6>
+                            <h6 class="fw-500 mb-0">With {{$session->instructor->user->full_name}}</h6>
                         </div>
                         @endif
                         @if ($studentProfile = Auth::user()->studentProfile && $session = Auth::user()->studentProfile->upcomingOtsSession())
                         <div class="list-group-item rounded p-4 mb-3 z-depth-1 shadow-none">
                             <h4 class="fw-600 blue-text">Your upcoming OTS session</h4>
                             <h6 class="fw-500">Scheduled for {{$session->scheduled_time->toFormattedDateString()}} (in {{$session->scheduled_time->diffForHumans()}})</h6>
-                            <h6 class="fw-500 mb-0">With {{$session->instructor->user->fullName('FL')}}</h6>
+                            <h6 class="fw-500 mb-0">With {{$session->instructor->user->full_name}}</h6>
                         </div>
                         @endif
                     </div>
@@ -473,45 +473,6 @@
     <small class="text-muted">Quote of the day provided by <a href="https://theysaidso.com">https://theysaidso.com</a></small>
 </div>
 
-<!-- Intro js -->
-<script>
-    function startTutorial()
-    {
-        var intro = introJs();
-        intro.setOptions({
-        steps: [
-            {
-            intro: "Hi {{Auth::user()->fullName('F')}}! Welcome to the tutorial for the Gander Oceanic website. We're excited to have you join us. On the dashboard, you can get a glance at your status within our OCA and access various functions. To begin, click the 'Next' button below."
-            },
-            {
-            element: "#atcResources",
-            intro: "Here you can view resources for Gander controllers, including sector files, documents, and the spreadsheet. If you're not a rostered controller yet, you may not be able to see everything. For pilot resources, click the Pilots tab on the navbar above."
-            },
-            {
-            element: '#yourData',
-            intro: "Here you can get an overview of your Gander Oceanic profile. Change your display name by clicking '{{Auth::user()->fullName('FLC')}}l and following the prompts. You can link your Discord account here and access to our Discord community, and you can even set an avatar for yourself. The buttons below allow you to change settings such as your biography, preferences, and manage your data.",
-            position: 'right'
-            },
-            {
-            element: '#certification',
-            intro: 'Here you can view your certification status with us, and if you\'re a rostered controller, your activity hours. You can also view your previous applications.',
-            position: 'left'
-            },
-            {
-            element: '#support',
-            intro: "If you ever need support from our staff or wish to send feedback, this is the place to do it. You can create a support ticket to a specific staff member, or send feedback on a controller or our operations.",
-            position: 'left'
-            },
-            {
-            intro: 'That\'s all for now! If you have any questions, please do not hesitate to contact us. The tutorial button on the top of the page will disappear when your account is older than 2 weeks. Enjoy!'
-            }
-        ]
-        });
-
-        intro.start();
-    }
-</script>
-<!-- End intro js -->
 
 <!--Change avatar modal-->
 <div class="modal fade" id="changeAvatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -533,7 +494,7 @@
                         <label class="custom-file-label">Choose image file</label>
                     </div>
                 </div>
-                @if(Auth::user()->hasDiscord())
+                @if(Auth::user()->discord_linked)
                     or use your Discord avatar (refreshes every 6 hours)<br/>
                     <a href="{{route('users.changeavatar.discord')}}" class="btn bg-czqo-blue-light mt-3">Use Discord Avatar</a>
                 @endif
@@ -627,7 +588,7 @@
 <!--Link/unlink Discord modal-->
 <div class="modal fade" id="discordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        @if (!Auth::user()->hasDiscord())
+        @if (!Auth::user()->discord_linked)
         <div class="modal-content">
             <div class="modal-header pb-2" style="border:none; text-align:center;">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -687,7 +648,7 @@
 </script>
 <!--End Discord modal-->
 
-@if(!Auth::user()->memberOfCzqoGuild())
+@if(!Auth::user()->member_of_discord_guild)
 <!--Join guild modal-->
 <div class="modal fade" id="joinDiscordServerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

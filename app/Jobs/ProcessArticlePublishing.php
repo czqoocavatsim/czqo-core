@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Roster\RosterMember as RosterMember;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Notifications\News as NewsNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -84,7 +84,7 @@ class ProcessArticlePublishing implements ShouldQueue
             break;
             case 2:
                 //Send to subscribed users
-                $users = User::cursor()->filter(function ($user) {
+                $users = UserAccount::cursor()->filter(function ($user) {
                     if ($prefs = $user->notificationPreferences) {
                         return $prefs->news_notifications == 'email';
                     }
@@ -101,7 +101,7 @@ class ProcessArticlePublishing implements ShouldQueue
             break;
             case 3:
                 //Send to all
-                $users = User::all();
+                $users = UserAccount::all();
                 foreach ($users as $user) {
                     $user->notify(new NewsNotification($user, $this->article));
                 }

@@ -74,7 +74,7 @@
             @auth
             <li class="nav-item" id="accountDropdown">
                 <div class="nav-link">
-                    <img src="{{Auth::user()->avatar()}}" style="height: 32px; width: 32px; margin-right: 10px; margin-bottom: 3px; border-radius: 50%;">&nbsp;<span class="fw-800">{{Auth::user()->fullName("FL")}}</span>
+                    <img src="{{Auth::user()->avatar()}}" style="height: 32px; width: 32px; margin-right: 10px; margin-bottom: 3px; border-radius: 50%;">&nbsp;<span class="fw-800">{{Auth::user()->full_name}}</span>
                 </div>
             </li>
             @endauth

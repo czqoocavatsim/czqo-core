@@ -49,7 +49,7 @@ class SoloCertGranted extends Notification
             ->greeting('Hi there,')
             ->line('You have been granted a solo certification.')
             ->line("Expiry: {$this->cert->expires->toFormattedDateString()}")
-            ->line("Granted by: {$this->cert->instructor->fullName('FLC')}")
+            ->line("Granted by: {$this->cert->instructor->full_name_cid}")
             ->line("Your use of this solo certification is bound to our policies and VATSIM's GRP. Your instructor will give you more information.")
             ->line('If you believe this is a mistake or have any questions, please email the Chief Instructor.')
             ->line('*You were sent this email as your training status with Gander Oceanic has been updated.*')
@@ -83,7 +83,7 @@ class SoloCertGranted extends Notification
                 ],
                 [
                     'name'   => 'Granted by',
-                    'value'  => $this->cert->instructor->fullName('FLC'),
+                    'value'  => $this->cert->instructor->full_name_cid,
                     'inline' => false,
                 ],
             ],

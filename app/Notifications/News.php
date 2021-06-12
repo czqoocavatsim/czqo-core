@@ -47,7 +47,7 @@ class News extends Notification
             ->greeting($this->news->title)
             ->line(new HtmlString($this->news->html()))
             ->subject($this->news->title)
-            ->salutation(new HtmlString("Sent by <b>{$this->news->user->fullName('FLC')} (".($this->news->user->staffProfile->position ?? '').')</b>' ?? 'No staff position found'.')</b>'));
+            ->salutation(new HtmlString("Sent by <b>{$this->news->user->full_name_cid} (".($this->news->user->staffProfile->position ?? '').')</b>' ?? 'No staff position found'.')</b>'));
     }
 
     /**

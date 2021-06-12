@@ -2,7 +2,7 @@
 
 namespace App\Models\Publications;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Publications\CustomPage $page
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|CustomPageResponse newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CustomPageResponse newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CustomPageResponse query()
@@ -31,7 +31,7 @@ class CustomPageResponse extends Model
 {
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function page()

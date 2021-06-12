@@ -58,7 +58,7 @@ class MyCzqoController extends Controller
         $user->notify(new WelcomeNewUser($user));
 
         //Redirect to myczqo
-        return redirect()->route('my.index')->with('success', "Welcome to Gander Oceanic, {$user->fullName('F')}! We are glad to have you on board.");
+        return redirect()->route('my.index')->with('success', "Welcome to Gander Oceanic, {$user->fname}! We are glad to have you on board.");
     }
 
     /**
@@ -173,7 +173,7 @@ class MyCzqoController extends Controller
         $user = Auth::user();
 
         //They need Discord don't they
-        if (!$user->hasDiscord()) {
+        if (!$user->discord_linked) {
             return redirect()->route('my.index')->with('error-modal', 'You must link your Discord account first.');
         }
 
@@ -239,7 +239,7 @@ class MyCzqoController extends Controller
         $user->save();
 
         //Member of guild?
-        if ($user->memberOfCzqoGuild())
+        if ($user->member_of_discord_guild)
         {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
@@ -248,7 +248,7 @@ class MyCzqoController extends Controller
             $arguments = [
                 'guild.id' => intval(config('services.discord.guild_id')),
                 'user.id'  => $user->discord_user_id,
-                'nick'     => $user->fullName('FLC'),
+                'nick'     => $user->full_name_cid,
             ];
 
             //Modify

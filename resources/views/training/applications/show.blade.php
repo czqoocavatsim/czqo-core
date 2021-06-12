@@ -75,7 +75,7 @@
                                         <div class="d-flex flex-row align-items-centre">
                                             <img src="{{$comment->user->avatar()}}" style="height: 30px; width: 30px; margin-right: 7px; border-radius: 50%;">
                                             <div style="width: 44%;" class="blue white-text rounded p-2">
-                                                <span class="font-weight-bold">{{$comment->user->fullName('FL')}} @if($comment->user->staffProfile) ({{$comment->user->staffProfile->position}}) @endif</span><br>
+                                                <span class="font-weight-bold">{{$comment->user->full_name}} @if($comment->user->staffProfile) ({{$comment->user->staffProfile->position}}) @endif</span><br>
                                                 {{$comment->content}}
                                             </div>
                                         </div>

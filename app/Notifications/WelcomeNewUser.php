@@ -43,7 +43,7 @@ class WelcomeNewUser extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->subject("Welcome to CZQO, {$this->user->fullName('FLC')}!")
+                    ->subject("Welcome to CZQO, {$this->user->full_name_cid}!")
                     ->from('chief@ganderoceanic.com', 'Andrew Ogden')
                     ->line("Welcome to Gander Oceanic, we're very excited that you're here!")
                     ->line("On our site you can find various resources relating to Oceanic operations in the North Atlantic for both pilots and controllers. Please don't hesitate to contact me should you have any questions about us!")

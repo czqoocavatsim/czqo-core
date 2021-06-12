@@ -1,11 +1,11 @@
 @extends('admin.training.layouts.main')
-@section('title', "Student {$student->user->fullName('FLC')} - ")
+@section('title', "Student {$student->user->full_name_cid} - ")
 @section('training-content')
     <a href="{{route('training.admin.instructing.students')}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> Students</a>
     <div class="d-flex flex-row align-items-center mt-3">
         <img src="{{$student->user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
         <div>
-            <h2 class="blue-text mt-2 mb-1">{{$student->user->fullName('FLC')}}</h2>
+            <h2 class="blue-text mt-2 mb-1">{{$student->user->full_name_cid}}</h2>
             <h5>
                 @foreach($student->labels as $label)
                     <span class="mr-2 student-label-span">
@@ -42,7 +42,7 @@
             <ul class="list-unstyled">
                 <li>Email: @if(Auth::user()->hasAnyRole('Senior Staff|Administrator') || ($student->instructor() && $student->instructor()->instructor == Auth::user()->instructorProfile))<a href="mailto:{{$student->user->email}}">{{$student->user->email}}</a>@else Private @endif</li>
                 <li>Discord:
-                    @if($student->user->hasDiscord())
+                    @if($student->user->discord_linked)
                         @if(Auth::user()->hasAnyRole('Senior Staff|Administrator') || ($student->instructor() && $student->instructor()->instructor == Auth::user()->instructorProfile))
                             {{$student->user->getDiscordUser()->username}}<span style="color: #797979;">#{{$student->user->getDiscordUser()->discriminator}}
                         @else
@@ -94,7 +94,7 @@
                         <div class="d-flex flex-row align-items-center">
                             <img src="{{$student->instructor()->instructor->user->avatar()}}" style="height: 30px; width:30px;margin-right: 15px; border-radius: 50%;">
                             <div class="d-flex flex-column align-items-center h-100">
-                                <h5 class="mb-0">{{$student->instructor()->instructor->user->fullName('FL')}}</h5>
+                                <h5 class="mb-0">{{$student->instructor()->instructor->user->full_name}}</h5>
                             </div>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
         <div class="modal-dialog modal-dialog-centered model-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Assign instructor to {{$student->user->fullName('F')}}</h5>
+                    <h5 class="modal-title">Assign instructor to {{$student->user->fname}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -235,7 +235,7 @@
                             <select name="instructor_id" class="form-control">
                                 <option hidden>Select one..</option>
                                 @foreach ($instructors as $i)
-                                    <option value="{{$i->id}}">{{$i->user->fullName('FLC')}} - {{$i->staffPageTagline()}} - {{count($i->studentsAssigned)}} Students</option>
+                                    <option value="{{$i->id}}">{{$i->user->full_name_cid}} - {{$i->staffPageTagline()}} - {{count($i->studentsAssigned)}} Students</option>
                                 @endforeach
                             </select>
                         </div>
@@ -255,7 +255,7 @@
         <div class="modal-dialog modal-dialog-centered model-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Assign status label to {{$student->user->fullName('F')}}</h5>
+                    <h5 class="modal-title">Assign status label to {{$student->user->fname}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

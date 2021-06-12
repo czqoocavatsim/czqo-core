@@ -10,7 +10,7 @@ use App\Models\Training\Instructing\Records\InstuctorRecommendation;
 use App\Models\Training\Instructing\Records\OTSSession;
 use App\Models\Training\Instructing\Records\StudentNote;
 use App\Models\Training\Instructing\Records\TrainingSession;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $recommendations_count
  * @property-read \Illuminate\Database\Eloquent\Collection|TrainingSession[] $trainingSessions
  * @property-read int|null $training_sessions_count
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|Student newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Student newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Student query()
@@ -67,7 +67,7 @@ class Student extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function notes()

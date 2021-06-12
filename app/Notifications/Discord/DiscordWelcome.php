@@ -45,7 +45,7 @@ class DiscordWelcome extends Notification
         $message = new DiscordMessage();
 
         $message->embed([
-            'title'  => 'Welcome to the Gander Oceanic Discord, '.Auth::user()->fullName('F').'!',
+            'title'  => 'Welcome to the Gander Oceanic Discord, '.Auth::user()->fname.'!',
             'color'  => 0x80c9,
             'fields' => [
                 [

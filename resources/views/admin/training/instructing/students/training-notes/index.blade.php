@@ -1,11 +1,11 @@
 @extends('admin.training.layouts.main')
-@section('title', "Training Notes - Student {$student->user->fullName('FLC')} - ")
+@section('title', "Training Notes - Student {$student->user->full_name_cid} - ")
 @section('training-content')
-    <a href="{{route('training.admin.instructing.students.view', $student->user_id)}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> {{$student->user->fullName('FL')}}</a>
+    <a href="{{route('training.admin.instructing.students.view', $student->user_id)}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> {{$student->user->full_name}}</a>
     <div class="d-flex flex-row align-items-center mt-3">
         <img src="{{$student->user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
         <div>
-            <h2 class="blue-text mt-2 mb-1">{{$student->user->fullName('F')}}'s Training Notes</h2>
+            <h2 class="blue-text mt-2 mb-1">{{$student->user->fname}}'s Training Notes</h2>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
             </div>
             <div class="d-none" id="policyEmbed{{$note->id}}">
                 <div class="d-flex flex-row justify-content-between">
-                    <p class="text-muted mt-3">Added by {{$note->instructor->user->fullName('FLC')}}, last edited <span style="text-decoration: underline; text-decoration-style:dotted; cursor: help;" title="{{$note->updated_at ?? ''}}">{{$note->updated_at ? $note->updated_at->diffForHumans() : 'never'}}</span>, {{$note->staff_only ? 'staff only' : 'visible to student'}}</p>
+                    <p class="text-muted mt-3">Added by {{$note->instructor->user->full_name_cid}}, last edited <span style="text-decoration: underline; text-decoration-style:dotted; cursor: help;" title="{{$note->updated_at ?? ''}}">{{$note->updated_at ? $note->updated_at->diffForHumans() : 'never'}}</span>, {{$note->staff_only ? 'staff only' : 'visible to student'}}</p>
                     <p class="mt-3">
                         <a class="text-muted" style="cursor:not-allowed"><i class="fa fa-edit"></i>&nbsp;Edit</a>
                         <a data-toggle="modal" data-target="#deleteNote{{$note->id}}Modal" class="red-text ml-2"><i class="fa fa-trash-alt"></i>&nbsp;Delete</a>
@@ -59,7 +59,7 @@
             </div>
             <div class="d-none" id="policyEmbed{{$note->id}}9999">
                 <div class="d-flex flex-row justify-content-between">
-                    <p class="text-muted mt-3">Added by {{$note->instructor->user->fullName('FLC')}}, last edited <span style="text-decoration: underline; text-decoration-style:dotted; cursor: help;" title="{{$note->updated_at ?? ''}}">{{$note->updated_at ? $note->updated_at->diffForHumans() : 'never'}}</span></p>
+                    <p class="text-muted mt-3">Added by {{$note->instructor->user->full_name_cid}}, last edited <span style="text-decoration: underline; text-decoration-style:dotted; cursor: help;" title="{{$note->updated_at ?? ''}}">{{$note->updated_at ? $note->updated_at->diffForHumans() : 'never'}}</span></p>
                 </div>
                 <hr>
                 <p>

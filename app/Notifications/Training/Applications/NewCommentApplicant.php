@@ -64,10 +64,10 @@ class NewCommentApplicant extends Notification
         $message->embed([
             'title'       => 'New comment on your application for Gander Oceanic',
             'url'         => route('training.applications.show', $this->application->reference_id),
-            'description' => "{$this->comment->user->fullName('FLC')} has left a comment on your application for Gander Oceanic. They may be asking for more information about your application or notifying you of your application status.",
+            'description' => "{$this->comment->user->full_name_cid} has left a comment on your application for Gander Oceanic. They may be asking for more information about your application or notifying you of your application status.",
             'color'       => 0x80c9,
             'author'      => [
-                'name' => $this->comment->user->fullName('FLC'),
+                'name' => $this->comment->user->full_name_cid,
             ],
             'fields' => [
                 [

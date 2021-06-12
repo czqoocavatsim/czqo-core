@@ -44,7 +44,7 @@ class NewFeedbackStaff extends Notification
         $message = new MailMessage();
         $message->subject("New {$this->submission->type->name}");
         $message->greeting('Hello!');
-        $message->line("{$this->submission->user->fullName('FLC')} has submitted {$this->submission->type->name}.");
+        $message->line("{$this->submission->user->full_name_cid} has submitted {$this->submission->type->name}.");
         foreach ($this->submission->fields as $f) {
             $message->line("**{$f->name}:** {$f->content}");
         }

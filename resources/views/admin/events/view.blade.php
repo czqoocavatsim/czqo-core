@@ -82,7 +82,7 @@
             @else
                 @foreach($applications as $a)
                     <div class="card p-3">
-                        <h5>{{$a->user->fullName('FLC')}} ({{$a->user->rating_GRP}}, {{$a->user->division_name}})</h5>
+                        <h5>{{$a->user->full_name_cid}} ({{$a->user->rating_GRP}}, {{$a->user->division_name}})</h5>
                         <p>{{$a->start_availability_timestamp}} to {{$a->end_availability_timestamp}}</p>
                         <h6>Comments</h6>
                         <p>{{$a->comments}}</p>

@@ -5,8 +5,8 @@
         <div class="d-flex flex-row align-items-center">
             <img src="{{$user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
             <div>
-                <h1 class="blue-text font-weight-bold mt-2 mb-1">{{$user->fullName('FL')}}</h1>
-                <h5>{{$user->highestRole()->name}}</h5>
+                <h1 class="blue-text font-weight-bold mt-2 mb-1">{{$user->full_name}}</h1>
+                <h5>{{$user->highest_role->name}}</h5>
             </div>
         </div>
         @if ($user->fname != $user->display_fname || !$user->display_last_name || $user->display_cid_only)
@@ -28,7 +28,7 @@
                         <li>CERT First Name: {{$user->fname}}</li>
                         <li>CERT Last Name: {{$user->lname}}</li>
                         @endcan
-                        <li>Display Name: {{$user->fullName('FLC')}}</li>
+                        <li>Display Name: {{$user->full_name_cid}}</li>
                     </ul>
                     <h5>Rating & Division</h5>
                     <ul class="list-unstyled">
@@ -145,10 +145,10 @@
                 </div>
                 <h5 class="mt-3 blue-text">Discord Link</h5>
                 <div class="list-group-item z-depth-1 rounded p-3">
-                    @if($user->hasDiscord())
+                    @if($user->discord_linked)
                     <h5><img style="border-radius:50%; height: 30px;" class="img-fluid" src="{{$user->getDiscordAvatar()}}" alt="">&nbsp;&nbsp;{{$user->getDiscordUser()->username}}#{{$user->getDiscordUser()->discriminator}}</h5>
                     <ul class="list-unstyled">
-                        <li class="d-flex align-items-center">Member of the CZQO Discord: <i style="margin-left: 5px;font-size: 20px;" class="{{$user->memberOfCzqoGuild() ? 'fas fa-check-circle green-text' : 'fas fa-times-circle red-text'}}"></i></li>
+                        <li class="d-flex align-items-center">Member of the CZQO Discord: <i style="margin-left: 5px;font-size: 20px;" class="{{$user->member_of_discord_guild ? 'fas fa-check-circle green-text' : 'fas fa-times-circle red-text'}}"></i></li>
                     </ul>
                     @else
                     This user does not have a linked Discord account.

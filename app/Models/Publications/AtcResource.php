@@ -2,7 +2,7 @@
 
 namespace App\Models\Publications;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Parsedown;
@@ -21,7 +21,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int $atc_only
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read User|null $user
+ * @property-read UserAccount|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|AtcResource newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AtcResource newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AtcResource query()
@@ -52,6 +52,6 @@ class AtcResource extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 }

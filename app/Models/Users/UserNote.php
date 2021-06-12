@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $timestamp
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Users\User $user
+ * @property-read \App\Models\Users\UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserNote newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserNote newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserNote query()
@@ -37,6 +37,6 @@ class UserNote extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 }

@@ -3,12 +3,12 @@
 
 @section('portal-content')
 <div class="container py-4">
-    <h2 class="blue-text mb-4 fw-700"><span id="greeting">Hello</span>, {{Auth::user()->fullName('F')}}!</h2>
+    <h2 class="blue-text mb-4 fw-700"><span id="greeting">Hello</span>, {{Auth::user()->fname}}!</h2>
     @if ($studentProfile = Auth::user()->studentProfile && $cert = Auth::user()->studentProfile->soloCertification())
     <div class="list-group-item rounded p-4 my-3 z-depth-1 shadow-none white-text {{ $cert->expires->diffInDays(Carbon\Carbon::now()) <= 2 ? 'red' : 'blue'}}">
         <h4 class="fw-600">{{ $cert->expires->diffInDays(Carbon\Carbon::now()) <= 2 ? 'Your solo certification is about to expire' : 'Your active solo certification'}}</h4>
         <h5 class="fw-500">Expires: {{$cert->expires->toFormattedDateString()}} (in {{$cert->expires->diffForHumans()}})</h5>
-        <h5 class="fw-500">Granted by: {{$cert->instructor->fullName('FL')}}</h5>
+        <h5 class="fw-500">Granted by: {{$cert->instructor->full_name}}</h5>
         <p class="mt-3 mb-0">{{ $cert->expires->diffInDays(Carbon\Carbon::now()) <= 2 ? 'Contact your instructor to request an extension or proceed to an OTS assessment.' : 'Your use of this solo certification is bound to our policies and VATSIM\'s GRP. Your instructor will give you more information.'}}</p>
     </div>
     @endif
@@ -16,14 +16,14 @@
     <div class="list-group-item rounded p-4 my-3 z-depth-1 shadow-none">
         <h4 class="fw-600 blue-text"><i class="far fa-calendar-check mr-2"></i>Your upcoming training session</h4>
         <h6 class="fw-500">Scheduled for {{$session->scheduled_time->toFormattedDateString()}} (in {{$session->scheduled_time->diffForHumans()}})</h6>
-        <h6 class="fw-500 mb-0">With {{$session->instructor->user->fullName('FL')}}</h6>
+        <h6 class="fw-500 mb-0">With {{$session->instructor->user->full_name}}</h6>
     </div>
     @endif
     @if ($studentProfile = Auth::user()->studentProfile && $session = Auth::user()->studentProfile->upcomingOtsSession())
     <div class="list-group-item rounded p-4 my-3 z-depth-1 shadow-none">
         <h4 class="fw-600 blue-text"><i class="far fa-calendar-check mr-2"></i>Your upcoming OTS session</h4>
         <h6 class="fw-500">Scheduled for {{$session->scheduled_time->toFormattedDateString()}} (in {{$session->scheduled_time->diffForHumans()}})</h6>
-        <h6 class="fw-500 mb-0">With {{$session->instructor->user->fullName('FL')}}</h6>
+        <h6 class="fw-500 mb-0">With {{$session->instructor->user->full_name}}</h6>
     </div>
     @endif
     @can('start applications')

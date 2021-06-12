@@ -29,7 +29,7 @@
                         <select class="custom-select" name="author">
                             <option value="{{Auth::id()}}" selected>You</option>
                             @foreach ($staff as $s)
-                                <option value="{{$s->user->id}}">{{$s->user->fullName('FLC')}} ({{$s->position}})</option>
+                                <option value="{{$s->user->id}}">{{$s->user->full_name_cid}} ({{$s->position}})</option>
                             @endforeach
                         </select>
                         <div class="ml-3">

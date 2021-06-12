@@ -33,7 +33,7 @@
                 <tr>
                     <th scope="row"><b>{{$controller->cid}}</b></th>
                     <td>
-                        {{$controller->user->fullName('FL')}}
+                        {{$controller->user->full_name}}
                         @if ($controller->activeSoloCertification())
                         <i title="Solo certification active - expires {{$controller->activeSoloCertification()->expires->toDateString()}}" class="fas fa-certificate"></i>
                     @endif

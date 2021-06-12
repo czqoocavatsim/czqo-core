@@ -42,7 +42,7 @@ class StudentAssignedToYou extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->line("You have been assigned student {$this->student->user->fullName('FLC')}.")
+            ->line("You have been assigned student {$this->student->user->full_name_cid}.")
             ->action('View Student Profile', route('training.admin.instructing.students.view', $this->student->user->id));
     }
 

@@ -7,7 +7,7 @@ aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered" role="document">
   <div class="modal-content">
       <div class="modal-body px-5 py-4">
-          <h4 class="blue-text fw-800">Hello{{ Auth::check() ? ', ' . Auth::user()->fullName('F') . '!' : '!' }}</h4>
+          <h4 class="blue-text fw-800">Hello{{ Auth::check() ? ', ' . Auth::user()->fname . '!' : '!' }}</h4>
           <hr>
           <ul class="list-unstyled">
               <li class="nav-item">
@@ -72,7 +72,7 @@ aria-hidden="true">
           <div class="d-flex flex-row justify-content-between">
               @auth
                   <div>
-                        <img src="{{Auth::user()->avatar()}}" style="height: 32px; width: 32px; margin-right: 10px; margin-bottom: 3px; border-radius: 50%;">&nbsp;<span class="fw-800 blue-text">{{Auth::user()->fullName("FL")}}</span>
+                        <img src="{{Auth::user()->avatar()}}" style="height: 32px; width: 32px; margin-right: 10px; margin-bottom: 3px; border-radius: 50%;">&nbsp;<span class="fw-800 blue-text">{{Auth::user()->full_name}}</span>
                   </div>
                   <div>
                       <a href="{{ route('auth.logout') }}" class="red-text fw-800"><i class="fas fa-sign-out-alt mr-2"></i>Log Out</a>

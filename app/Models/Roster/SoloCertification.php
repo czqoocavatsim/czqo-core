@@ -2,7 +2,7 @@
 
 namespace App\Models\Roster;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $expiry_notification_sent
  * @property \Illuminate\Support\Carbon|null $expiry_notification_time
- * @property-read User $instructor
+ * @property-read UserAccount $instructor
  * @property-read \App\Models\Roster\RosterMember $rosterMember
  * @method static \Illuminate\Database\Eloquent\Builder|SoloCertification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SoloCertification newQuery()
@@ -42,7 +42,7 @@ class SoloCertification extends Model
 
     public function instructor()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     protected $dates = [

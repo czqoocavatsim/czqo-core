@@ -4,7 +4,7 @@ namespace App\Mail;
 
 use App\Models\Tickets\Ticket;
 use App\Models\Tickets\TicketReply;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -35,6 +35,6 @@ class NewTicketReplyMail extends Mailable
     public function build()
     {
         return $this->view('emails.ticketreply')
-            ->subject('#'.$this->ticket->ticket_id.' | New Reply from '.User::find($this->ticketReply->user_id)->fname.' '.User::find($this->ticketReply->user_id)->lname);
+            ->subject('#'.$this->ticket->ticket_id.' | New Reply from '.UserAccount::find($this->ticketReply->user_id)->fname.' '.UserAccount::find($this->ticketReply->user_id)->lname);
     }
 }

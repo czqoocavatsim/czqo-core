@@ -8,7 +8,7 @@
             @foreach($resultsStudents as $r)
                 <a href="{{route('training.admin.instructing.students.view', $r->user_id)}}" class="list-group-item list-group-item-action waves-effect">
                     <div class="d-flex flex-column">
-                        <h5 class="blue-text fw-700 mb-2">{{$r->user->fullName('FLC')}}</h5>
+                        <h5 class="blue-text fw-700 mb-2">{{$r->user->full_name_cid}}</h5>
                         <div class="d-flex flex-row">
                             @foreach($r->labels as $label)
                             <div class="mr-1 pb-0">
@@ -27,7 +27,7 @@
             @foreach($resultsInstructors as $r)
                 <a href="{{route('training.admin.instructing.instructors.view', $r->user_id)}}" class="list-group-item list-group-item-action waves-effect">
                     <div class="d-flex flex-column">
-                        <h5 class="blue-text fw-700 mb-0">{{$r->user->fullName('FLC')}}</h5>
+                        <h5 class="blue-text fw-700 mb-0">{{$r->user->full_name_cid}}</h5>
                     </div>
                 </a>
             @endforeach
@@ -43,7 +43,7 @@
                             <img src="{{$r->instructor->user->avatar()}}" class="z-depth-1" style="height: 30px; width:30px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
                             <img src="{{$r->student->user->avatar()}}" class="z-depth-1" style="height: 30px; z-index: 50; margin-left: -30px; width:30px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
                             <div>
-                                <h5 class="blue-text fw-700 font-weight-bold">{{$r->student->user->fullName('FLC')}}</h5>
+                                <h5 class="blue-text fw-700 font-weight-bold">{{$r->student->user->full_name_cid}}</h5>
                                 <p class="fw-400 mb-0">
                                     Scheduled for {{$r->scheduled_time->toDayDateTimeString()}}
                                 </p>
@@ -64,7 +64,7 @@
                             <img src="{{$r->instructor->user->avatar()}}" class="z-depth-1" style="height: 30px; width:30px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
                             <img src="{{$r->student->user->avatar()}}" class="z-depth-1" style="height: 30px; z-index: 50; margin-left: -30px; width:30px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
                             <div>
-                                <h5 class="blue-text fw-700 font-weight-bold">{{$r->student->user->fullName('FLC')}}</h5>
+                                <h5 class="blue-text fw-700 font-weight-bold">{{$r->student->user->full_name_cid}}</h5>
                                 <p class="fw-400 mb-0">
                                     Scheduled for {{$r->scheduled_time->toDayDateTimeString()}}
                                 </p>

@@ -81,7 +81,7 @@
                                 <div style="font-size: 1.1em;">
                                     @if ($rosterMember = App\Models\Roster\RosterMember::where('cid', $controller['cid'])->first())
                                         <img src="{{$rosterMember->user->avatar()}}" style="height: 35px; !important; width: 35px !important; margin-left: 10px; margin-right: 5px; margin-bottom: 3px; border-radius: 50%;">
-                                        {{$rosterMember->user->fullName('FLC')}}
+                                        {{$rosterMember->user->full_name_cid}}
                                     @else
                                         <div class="my-1">
                                             {{$controller['realname']}} {{$controller['cid']}}
@@ -142,7 +142,7 @@
                     <div class="d-flex flex-row mb-2">
                         <img src="{{$cert->controller->avatar()}}" style="height: 55px !important; width: 55px !important; margin-right: 10px; margin-bottom: 3px; border-radius: 50%;">
                         <div class="d-flex flex-column">
-                            <h4 class="fw-400">{{$cert->controller->fullName('FL')}}</h4>
+                            <h4 class="fw-400">{{$cert->controller->full_name}}</h4>
                             <p title="{{$cert->timestamp->toDayDateTimeString()}}">{{$cert->timestamp->diffForHumans()}}</p>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                                 <span style="font-size: 1.4em;">
                                     <img src="{{$c->user->avatar()}}" style="height: 35px; !important; width: 35px !important; margin-left: 10px; margin-right: 5px; margin-bottom: 3px; border-radius: 50%;">
                                     <div class="d-flex flex-column ml-2">
-                                        <h4 class="fw-400">{{$c->user->fullName('FL')}}</h4>
+                                        <h4 class="fw-400">{{$c->user->full_name}}</h4>
                                         <p>{{$c->monthly_hours}} hours this month</p>
                                     </div>
                                 </span>

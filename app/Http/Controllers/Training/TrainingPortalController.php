@@ -80,7 +80,7 @@ class TrainingPortalController extends Controller
                         'url'         => route('training.admin.instructing.students.view', $student->user_id),
                         'timestamp'   => Carbon::now(),
                         'color'       => hexdec('2196f3'),
-                        'description' => $student->user->fullName('FLC'),
+                        'description' => $student->user->full_name_cid,
                     ],
                 ]);
 
@@ -90,7 +90,7 @@ class TrainingPortalController extends Controller
         }
 
         //Return
-        return redirect()->route('training.portal.index')->with('success', 'Thank you for submitting your availability, '.Auth::user()->fullName('F').'!');
+        return redirect()->route('training.portal.index')->with('success', 'Thank you for submitting your availability, '.Auth::user()->fname.'!');
     }
 
     public function helpPolicies()

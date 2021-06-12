@@ -2,13 +2,13 @@
 
 namespace App\Models\ControllerBookings;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\ControllerBookings\ControllerBookingsBan
  *
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|ControllerBookingsBan newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ControllerBookingsBan newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ControllerBookingsBan query()
@@ -22,6 +22,6 @@ class ControllerBookingsBan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 }

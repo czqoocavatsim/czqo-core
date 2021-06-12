@@ -6,7 +6,7 @@ use App\Models\Roster\RosterMember;
 use App\Models\Training\Instructing\Instructor;
 use App\Models\Training\Instructing\Student;
 use App\Models\Users\StaffMember;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Notifications\News\Announcement as AnnouncementNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -48,7 +48,7 @@ class ProcessAnnouncement implements ShouldQueue
         switch ($this->announcement->target_group) {
             case 'everyone':
                 //Every user
-                $users = User::all();
+                $users = UserAccount::all();
                 foreach ($users as $user) {
                     $user->notify(new AnnouncementNotification($user, $this->announcement));
                 }

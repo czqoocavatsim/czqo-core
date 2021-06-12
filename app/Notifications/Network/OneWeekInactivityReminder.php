@@ -43,7 +43,7 @@ class OneWeekInactivityReminder extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->greeting("Hi {$this->rosterMember->user->fullName('FLC')}")
+            ->greeting("Hi {$this->rosterMember->user->full_name_cid}")
             ->line('**One Week Left - Activity Reminder**')
             ->line('According to our records, you have not yet fulfilled our currency requirement. You require **3 hours** online controlling on Gander or Shanwick by the end of the quarter, otherwise you will be marked inactive.')
             ->line('There is one week remaining in the current quarter, so this email serves only as a reminder in case you may have forgotten.')

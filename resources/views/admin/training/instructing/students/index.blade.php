@@ -18,7 +18,7 @@
                     <div class="d-flex flex-row w-100 align-items-center h-100">
                         <img src="{{$s->user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
                         <div class="d-flex flex-column h-100">
-                            <h5 class="mb-1">{{$s->created_at->format('d M')}} - {{$s->user->fullName('FLC')}}</h5>
+                            <h5 class="mb-1">{{$s->created_at->format('d M')}} - {{$s->user->full_name_cid}}</h5>
                             <h5>
                                 @foreach($s->labels as $label)
                                     <span class="mr-2">
@@ -41,7 +41,7 @@
             <tbody>
                 @foreach ($pastStudents as $s)
                     <tr>
-                        <td>{{$s->user->fullName('FLC')}}</td>
+                        <td>{{$s->user->full_name_cid}}</td>
                         <td>
                             <a class="blue-text" href="{{route('training.admin.instructing.students.view', $s->user->id)}}">
                                 <i class="fas fa-eye"></i>&nbsp;View Profile

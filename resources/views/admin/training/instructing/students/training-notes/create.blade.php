@@ -1,7 +1,7 @@
 @extends('admin.training.layouts.main')
-@section('title', "Add Training Note - Student {$student->user->fullName('FLC')} - ")
+@section('title', "Add Training Note - Student {$student->user->full_name_cid} - ")
 @section('training-content')
-    <a href="{{route('training.admin.instructing.students.records.training-notes', $student->user_id)}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> {{$student->user->fullName('F')}}'s Training Notes</a>
+    <a href="{{route('training.admin.instructing.students.records.training-notes', $student->user_id)}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> {{$student->user->fname}}'s Training Notes</a>
     <div class="d-flex flex-row align-items-center mt-3">
         <div>
             <h2 class="blue-text mt-2 mb-1">Add training note</h2>

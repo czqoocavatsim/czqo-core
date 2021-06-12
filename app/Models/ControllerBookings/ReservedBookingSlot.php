@@ -3,13 +3,13 @@
 namespace App\Models\ControllerBookings;
 
 use App\Models\Network\VatsimPosition;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\ControllerBookings\ReservedBookingSlot
  *
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|ReservedBookingSlot newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ReservedBookingSlot newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ReservedBookingSlot query()
@@ -23,7 +23,7 @@ class ReservedBookingSlot extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function position()

@@ -43,7 +43,7 @@ class NewControllerSignUp extends Notification
     {
         return (new MailMessage())
                     ->subject("Sign Up For Event {$this->signUp->event->name}")
-                    ->line("{$this->signUp->user->fullName('FLC')} has signed up for the event {$this->signUp->event->name}.")
+                    ->line("{$this->signUp->user->full_name_cid} has signed up for the event {$this->signUp->event->name}.")
                     ->line("Availability: {$this->signUp->start_availability_timestamp} to {$this->signUp->end_availability_timestamp}")
                     ->action('View All Sign Ups', route('events.admin.view', $this->signUp->event->slug))
                     ->salutation('Gander Oceanic OCA');

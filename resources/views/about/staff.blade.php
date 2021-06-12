@@ -36,7 +36,7 @@
                                             @if($member->vacant())
                                             Vacant
                                             @else
-                                            {{$member->user->fullname('FL')}}
+                                            {{$member->user->full_name}}
                                             @endif
                                         </h4>
                                         <h5>{{$member->position}}</h5>
@@ -66,7 +66,7 @@
                                         @if($member->vacant())
                                         Vacant
                                         @else
-                                        {{$member->user->fullname('FL')}}
+                                        {{$member->user->full_name}}
                                         @endif
                                     </h4>
                                     <h5>{{$member->position}}</h5>
@@ -92,7 +92,7 @@
                                 <img src="{{$instructor->user->avatar()}}" style="height: 80px; width:80px;margin-right: 15px; border-radius: 50%;">
                                 <div class="d-flex flex-column">
                                     <h4 class="font-weight-bold">
-                                        {{$instructor->user->fullname('FL')}}
+                                        {{$instructor->user->full_name}}
                                     </h4>
                                     <p>{{$instructor->staffPageTagline()}}</p>
                                     <p class="mb-0">

@@ -59,14 +59,14 @@
                 <div class="d-flex flex-row align-items-center">
                     <img src="{{Auth::user()->avatar()}}" style="height: 27px; width:27px;margin-right: 13px; margin-bottom: 3px; border-radius: 50%;">
                     <div class="d-flex flex-column">
-                        <span class="fw-600">{{Auth::user()->fullName('F')}}</span>
+                        <span class="fw-600">{{Auth::user()->fname}}</span>
                         <span class="text-muted">
                             @if(Auth::user()->staffProfile)
                                 {{Auth::user()->staffProfile->position}}
                             @elseif (Auth::user()->instructorProfile)
                                 {{Auth::user()->instructorProfile->staffPageTagline()}}
                             @else
-                                {{Auth::user()->highestRole()->name}}
+                                {{Auth::user()->highest_role->name}}
                             @endif
                         </span>
                     </div>

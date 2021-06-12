@@ -59,7 +59,7 @@
         <div style="width: 25%;">
             <select data-pretty-name="Training notifications" data-table="notifications" name="training_notifications" id="" class="form-control pref-dropdown">
                 <option value="email">Email only</option>
-                <option @if(!Auth::user()->hasDiscord()) disabled @endif value="email+discord">Email and Discord DMs @if(!Auth::user()->hasDiscord()) (Please link your Discord account to select this option) @endif</option>
+                <option @if(!Auth::user()->discord_linked) disabled @endif value="email+discord">Email and Discord DMs @if(!Auth::user()->discord_linked) (Please link your Discord account to select this option) @endif</option>
             </select>
             <div class="d-none float-right" id="training_notifications_loading">
                 <div class="d-flex flex-row align-items-center">

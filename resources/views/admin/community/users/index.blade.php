@@ -20,10 +20,10 @@
                 @foreach ($users as $user)
                     <tr>
                         <th scope="row"><b>{{$user->id}}</b></th>
-                        <td>{{$user->fullName('FL')}}</td>
+                        <td>{{$user->full_name}}</td>
                         <td>{{$user->rating_short ?? 'N/A'}}</td>
                         <td>
-                            {{$user->highestRole()->name}}
+                            {{$user->highest_role->name}}
                         </td>
                         <td>
                             <a class="blue-text" href="{{route('community.users.view', $user->id)}}"><i class="fa fa-eye"></i> View User</a>

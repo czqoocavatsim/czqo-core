@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Training\Instructing\Instructors\Instructor;
 use App\Models\Users\StaffGroup;
 use App\Models\Users\StaffMember;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Http\Request;
 
 class StaffListController extends Controller
@@ -51,7 +51,7 @@ class StaffListController extends Controller
         $staff = StaffMember::whereId($id)->firstOrFail();
 
         //Check user given is a user
-        $user = User::whereId($request->get('cid'))->first();
+        $user = UserAccount::whereId($request->get('cid'))->first();
         if (!$user) {
             return redirect()->back()->withInput()->with('error', 'CID for staff member '.$staff->shortform.' invalid!');
         }

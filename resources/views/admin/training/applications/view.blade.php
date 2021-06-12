@@ -1,7 +1,7 @@
 @extends('admin.training.layouts.main')
 @section('training-content')
 <a href="{{route('training.admin.applications')}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> Applications</a>
-<h2 class="blue-text mt-2 pb-2">#{{$application->reference_id}} - {{$application->user->fullName('FLC')}}</h2>
+<h2 class="blue-text mt-2 pb-2">#{{$application->reference_id}} - {{$application->user->full_name_cid}}</h2>
 <div class="py-2">
     <h3 class="blue-text mb-3">Details</h3>
     <div class="row ">
@@ -85,7 +85,7 @@
                                     <div class="d-flex flex-row align-items-centre">
                                         <img src="{{$comment->user->avatar()}}" style="height: 30px; width: 30px; margin-right: 7px; border-radius: 50%;">
                                         <div style="width: 44%;" class="blue white-text rounded p-2">
-                                            <span class="font-weight-bold">{{$comment->user->fullName('FL')}}</span><br>
+                                            <span class="font-weight-bold">{{$comment->user->full_name}}</span><br>
                                             {{$comment->content}}
                                         </div>
                                     </div>

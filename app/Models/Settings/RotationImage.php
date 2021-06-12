@@ -2,7 +2,7 @@
 
 namespace App\Models\Settings;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -16,7 +16,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|RotationImage newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RotationImage newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RotationImage query()
@@ -37,6 +37,6 @@ class RotationImage extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 }

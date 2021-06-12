@@ -49,7 +49,7 @@ class SoloCertExpiringUser extends Notification
             ->greeting('Hi there,')
             ->line('Your solo certification is about to expire.')
             ->line("Expiry: {$this->cert->expires->toFormattedDateString()}")
-            ->line("Granted by: {$this->cert->instructor->fullName('FLC')}")
+            ->line("Granted by: {$this->cert->instructor->full_name_cid}")
             ->line('Contact your instructor to request an extension or proceed to an OTS assessment.')
             ->line('If you believe this is a mistake or have any questions, please email the Chief Instructor.')
             ->line('*You were sent this email as your training status with Gander Oceanic is about to change.*')
@@ -83,7 +83,7 @@ class SoloCertExpiringUser extends Notification
                 ],
                 [
                     'name'   => 'Granted by',
-                    'value'  => $this->cert->instructor->fullName('FLC'),
+                    'value'  => $this->cert->instructor->full_name_cid,
                     'inline' => false,
                 ],
             ],

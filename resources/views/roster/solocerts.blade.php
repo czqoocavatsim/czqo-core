@@ -34,7 +34,7 @@
                 <tr>
                     <th scope="row"><b>{{$controller->rosterMember->cid}}</b></th>
                     <td>
-                        {{$controller->rosterMember->user->fullName('FL')}}
+                        {{$controller->rosterMember->user->full_name}}
                     </td>
                     <td>
                         {{$controller->expires->toDateString()}}

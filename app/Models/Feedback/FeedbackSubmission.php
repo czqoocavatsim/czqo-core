@@ -2,7 +2,7 @@
 
 namespace App\Models\Feedback;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\HtmlString;
@@ -34,7 +34,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Feedback\FeedbackTypeFieldSubmission[] $fields
  * @property-read int|null $fields_count
  * @property-read \App\Models\Feedback\FeedbackType $type
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|FeedbackSubmission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|FeedbackSubmission newQuery()
  * @method static \Illuminate\Database\Query\Builder|FeedbackSubmission onlyTrashed()
@@ -77,11 +77,11 @@ class FeedbackSubmission extends Model
     /**
      * Returns the user who submitted the feedback.
      *
-     * @return \App\Models\Users\User
+     * @return \App\Models\Users\UserAccount
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     /**

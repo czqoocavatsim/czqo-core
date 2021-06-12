@@ -25,7 +25,7 @@
             <tr>
                 <th scope="row" class="font-weight-bold"><a href="{{route('training.admin.roster.viewcontroller', $r->cid)}}">{{$r->cid}}</a></th>
                 <td>
-                    {{$r->user->fullName('FL')}}
+                    {{$r->user->full_name}}
                     @if ($r->activeSoloCertification())
 
                         <i title="Solo certification active - expires {{$r->activeSoloCertification()->expires->toDateString()}}" class="fas fa-certificate"></i>

@@ -2,7 +2,7 @@
 
 namespace App\Models\News;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Parsedown;
@@ -23,7 +23,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|Announcement newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Announcement newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Announcement query()
@@ -51,7 +51,7 @@ class Announcement extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function html()

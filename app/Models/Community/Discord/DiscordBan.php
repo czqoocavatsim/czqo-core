@@ -2,7 +2,7 @@
 
 namespace App\Models\Community\Discord;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Parsedown;
@@ -20,8 +20,8 @@ use Parsedown;
  * @property int|null $discord_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read User $moderator
- * @property-read User $user
+ * @property-read UserAccount $moderator
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|DiscordBan newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DiscordBan newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DiscordBan query()
@@ -53,12 +53,12 @@ class DiscordBan extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function moderator()
     {
-        return $this->belongsTo(User::class, 'moderator_id');
+        return $this->belongsTo(UserAccount::class, 'moderator_id');
     }
 
     public function reasonHtml()

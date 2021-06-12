@@ -45,14 +45,14 @@ class SessionAssignedToYou extends Notification
         if ($this->type == 'training') {
             return (new MailMessage())
                 ->subject("You've Been Assigned To A Training Session")
-                ->line("You have been assigned to a training session with {$this->session->student->user->fullName('FLC')}, scheduled for {$this->session->scheduled_time->toDayDateTimeString()}.")
+                ->line("You have been assigned to a training session with {$this->session->student->user->full_name_cid}, scheduled for {$this->session->scheduled_time->toDayDateTimeString()}.")
                 ->line('If you have any questions, please contact the Chief Instructor.')
                 ->action('View Session', route('training.admin.instructing.training-sessions.view', $this->session))
                 ->salutation('Gander Oceanic OCA');
         } elseif ($this->type == 'ots') {
             return (new MailMessage())
                 ->subject("You've Been Assigned To A OTS Session")
-                ->line("You have been assigned to a OTS session with {$this->session->student->user->fullName('FLC')}, scheduled for {$this->session->scheduled_time->toDayDateTimeString()}.")
+                ->line("You have been assigned to a OTS session with {$this->session->student->user->full_name_cid}, scheduled for {$this->session->scheduled_time->toDayDateTimeString()}.")
                 ->line('If you have any questions, please contact the Chief Instructor.')
                 ->action('View Session', route('training.admin.instructing.training-sessions.view', $this->session))
                 ->salutation('Gander Oceanic OCA');

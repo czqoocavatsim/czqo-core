@@ -43,8 +43,8 @@ class StudentRecommendedForSoloCert extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject("{$this->student->user->fullName('FLC')} Recommended For Solo Certification")
-            ->line("{$this->instructor->user->fullName('FL')} has recommended student {$this->student->user->fullName('FLC')} for a solo certification.")
+            ->subject("{$this->student->user->full_name_cid} Recommended For Solo Certification")
+            ->line("{$this->instructor->user->full_name} has recommended student {$this->student->user->full_name_cid} for a solo certification.")
             ->action('View Student', route('training.admin.instructing.students.view', $this->student->user_id))
             ->salutation('Gander Oceanic OCA');
     }

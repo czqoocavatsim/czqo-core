@@ -7,7 +7,7 @@
 <div class="container p-5 white" style="margin-top: -100px; margin-bottom: 5rem !important; {{Auth::user()->preferences->ui_mode == 'dark' ? 'background-color:rgb(47,49,54)' : ''}}">
     <h1 class="blue-text mb-4" style="font-size: 3em;">Submit your availability.</h1>
     <p class="lead">
-        Welcome to Gander Oceanic, {{Auth::user()->fullName('F')}}! We're excited to have you with us. Before we start your training, we need you to submit your availability for training sessions for the next couple of weeks. This allows us to assign you an Instructor who is best suited to your timezone.
+        Welcome to Gander Oceanic, {{Auth::user()->fname}}! We're excited to have you with us. Before we start your training, we need you to submit your availability for training sessions for the next couple of weeks. This allows us to assign you an Instructor who is best suited to your timezone.
     </p>
     <p>To begin, enter your availability for the next 2 weeks, using the Zulu/GMT time zone.</p>
     @if ($errors->submitAvailabilityErrors->any())

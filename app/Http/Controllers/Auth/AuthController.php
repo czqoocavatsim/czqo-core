@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Models\Users\UserNotificationPreferences;
 use App\Models\Users\UserPreferences;
 use App\Models\Users\UserPrivacyPreferences;
@@ -92,7 +92,7 @@ class AuthController extends Controller
         if (!isset($response->data->vatsim->rating)) {
             return redirect()->route('index')->with('error-modal', 'We cannot create an account without VATSIM details.');
         }
-        User::updateOrCreate(['id' => $response->data->cid], [
+        UserAccount::updateOrCreate(['id' => $response->data->cid], [
             'email'         => isset($response->data->personal->email) ? $response->data->personal->email : 'no-reply@ganderoceanic.com',
             'fname'         => isset($response->data->personal->name_first) ? utf8_decode($response->data->personal->name_first) : $response->data->cid,
             'lname'         => isset($response->data->personal->name_last) ? $response->data->personal->name_last : $response->data->cid,
@@ -108,7 +108,7 @@ class AuthController extends Controller
             'display_fname' => isset($response->data->personal->name_first) ? utf8_decode($response->data->personal->name_first) : $response->data->cid,
             'used_connect'  => true,
         ]);
-        $user = User::find($response->data->cid);
+        $user = UserAccount::find($response->data->cid);
         if (!isset($response->data->personal->name_first)) {
             $user->display_cid_only = true;
         }
@@ -131,6 +131,6 @@ class AuthController extends Controller
             $notif->save();
         }
 
-        return redirect()->route('my.index')->with('success', "Welcome back, {$user->fullName('F')}!");
+        return redirect()->route('my.index')->with('success', "Welcome back, {$user->fname}!");
     }
 }

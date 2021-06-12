@@ -2,7 +2,7 @@
 
 namespace App\Models\Roster;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
@@ -24,7 +24,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property float|null $currency
  * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read User $user
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|RosterMember newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RosterMember newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|RosterMember query()
@@ -53,7 +53,7 @@ class RosterMember extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function getLeaderboardHours()

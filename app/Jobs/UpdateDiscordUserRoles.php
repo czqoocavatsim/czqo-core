@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -42,9 +42,9 @@ class UpdateDiscordUserRoles implements ShouldQueue
         $counter = 0;
 
         //Get all Discord linked users
-        foreach (User::where('discord_user_id', '!=', null)->cursor() as $user) {
+        foreach (UserAccount::where('discord_user_id', '!=', null)->cursor() as $user) {
             //Test if they're on the server or a staff member
-            if (!$user->memberOfCzqoGuild() || $user->staffProfile || $user->isBot()) {
+            if (!$user->member_of_discord_guild || $user->staffProfile || $user->isBot()) {
                 //They're not.. continue on.
                 continue;
             }
@@ -95,7 +95,7 @@ class UpdateDiscordUserRoles implements ShouldQueue
             $arguments = [
                 'guild.id' => intval(config('services.discord.guild_id')),
                 'user.id'  => $user->discord_user_id,
-                'nick'     => $user->fullName('FLC'),
+                'nick'     => $user->full_name_cid,
                 'roles'    => $rolesToAdd,
             ];
 
@@ -103,10 +103,10 @@ class UpdateDiscordUserRoles implements ShouldQueue
             $discord->guild->modifyGuildMember($arguments);
 
             /* //Notify them if roles/nickname were change
-            if ($user->fullName('FLC') != $guildMember->nick) {
+            if ($user->full_name_cid != $guildMember->nick) {
                 $discord->channel->createMessage([
                     'channel.id' => intval($user->discord_dm_channel_id),
-                    'content' => 'Hi there! Your nickname on the Gander Oceanic Discord has been updated from "' . $guildMember->nick . '" to "' . $user->fullName('FLC') . '" as per your website nickname settings. If this is a mistake, please contact the Web Team.'
+                    'content' => 'Hi there! Your nickname on the Gander Oceanic Discord has been updated from "' . $guildMember->nick . '" to "' . $user->full_name_cid . '" as per your website nickname settings. If this is a mistake, please contact the Web Team.'
                 ]);
             }
 

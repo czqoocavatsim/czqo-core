@@ -48,16 +48,16 @@ class Session24HrReminder extends Notification
         if ($this->type == 'training') {
             return (new MailMessage())
                 ->subject('Reminder: Your Training Session Today')
-                ->greeting("Hi {$this->session->student->user->fullName('F')},")
-                ->line("This is a reminder that {$this->session->instructor->user->fullName('FL')} has scheduled a training session with you for {$this->session->scheduled_time->toDayDateTimeString()}.")
+                ->greeting("Hi {$this->session->student->user->fname},")
+                ->line("This is a reminder that {$this->session->instructor->user->full_name} has scheduled a training session with you for {$this->session->scheduled_time->toDayDateTimeString()}.")
                 ->line('If you have any questions, please contact your Instructor.')
                 ->action('View Session', route('training.portal.sessions.view-training-session', $this->session))
                 ->salutation('Gander Oceanic OCA');
         } elseif ($this->type == 'ots') {
             return (new MailMessage())
                 ->subject('Reminder: Your OTS Session Today')
-                ->greeting("Hi {$this->session->student->user->fullName('F')},")
-                ->line("This is a reminder that {$this->session->instructor->user->fullName('FL')} has scheduled an OTS session with you for {$this->session->scheduled_time->toDayDateTimeString()}.")
+                ->greeting("Hi {$this->session->student->user->fname},")
+                ->line("This is a reminder that {$this->session->instructor->user->full_name} has scheduled an OTS session with you for {$this->session->scheduled_time->toDayDateTimeString()}.")
                 ->line('If you have any questions, please contact your Assessor.')
                 ->action('View Session', route('training.portal.sessions.view-ots-session', $this->session))
                 ->salutation('Gander Oceanic OCA');
@@ -78,7 +78,7 @@ class Session24HrReminder extends Notification
         if ($this->type == 'training') {
             $message->embed([
                 'title'       => 'Reminder: Your Training Session Today',
-                'description' => "This is a reminder that {$this->session->instructor->user->fullName('FL')} has scheduled a training session with you for {$this->session->scheduled_time->toDayDateTimeString()}. If you have any questions, please contact your Instructor.",
+                'description' => "This is a reminder that {$this->session->instructor->user->full_name} has scheduled a training session with you for {$this->session->scheduled_time->toDayDateTimeString()}. If you have any questions, please contact your Instructor.",
                 'color'       => 0x80c9,
                 'timestamp'   => Carbon::now(),
                 'footer'      => [
@@ -88,7 +88,7 @@ class Session24HrReminder extends Notification
         } elseif ($this->type == 'ots') {
             $message->embed([
                 'title'       => 'Reminder: Your OTS Session Today',
-                'description' => "This is a reminder that {$this->session->instructor->user->fullName('FL')} has scheduled an OTS session with you for {$this->session->scheduled_time->toDayDateTimeString()}. If you have any questions, please contact your Assessor.",
+                'description' => "This is a reminder that {$this->session->instructor->user->full_name} has scheduled an OTS session with you for {$this->session->scheduled_time->toDayDateTimeString()}. If you have any questions, please contact your Assessor.",
                 'color'       => 0x80c9,
                 'timestamp'   => Carbon::now(),
                 'footer'      => [

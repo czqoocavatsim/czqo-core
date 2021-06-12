@@ -1,9 +1,9 @@
 @extends('layouts.email')
 
-@section('to-line', 'Hi '. $application->user->fullName('F') . ',')
+@section('to-line', 'Hi '. $application->user->fname . ',')
 
 @section('message-content')
-<p>{{$comment->user->fullName('FLC')}} has left a comment on your application for Gander Oceanic. They may be asking for more information about your application or notifying you of your application status.</p>
+<p>{{$comment->user->full_name_cid}} has left a comment on your application for Gander Oceanic. They may be asking for more information about your application or notifying you of your application status.</p>
 <hr>
 <h5>Comment</h5>
 <p>{{$comment->content}}</p>
@@ -15,7 +15,7 @@ You can respond to their comment and view your application <a href="{{route('tra
 Sent by Gander Oceanic OCA
 @endsection
 
-@section('footer-to-line', $application->user->fullName('FLC').' ('.$application->user->email.')')
+@section('footer-to-line', $application->user->full_name_cid.' ('.$application->user->email.')')
 
 @section('footer-reason-line')
 there is an update on your application to become a Gander Oceanic Controller.

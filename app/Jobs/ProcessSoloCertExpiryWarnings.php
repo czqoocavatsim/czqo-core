@@ -53,7 +53,7 @@ class ProcessSoloCertExpiryWarnings implements ShouldQueue
                     'channel.id' => intval(config('services.discord.instructors')),
                     'content'    => '',
                     'embed'      => [
-                        'title'       => 'Solo certification for '.$cert->rosterMember->user->fullName('FLC').' is about to expire.',
+                        'title'       => 'Solo certification for '.$cert->rosterMember->user->full_name_cid.' is about to expire.',
                         'url'         => route('training.admin.solocertifications'),
                         'timestamp'   => Carbon::now(),
                         'color'       => hexdec('2196f3'),

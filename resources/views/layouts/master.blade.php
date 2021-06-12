@@ -34,9 +34,10 @@
         <meta name="og:title" content="@yield('title', '')Gander Oceanic OCA">
         <meta name="og:description" content="@yield('description', '')">
         <meta name="og:image" content="@yield('image','https://cdn.ganderoceanic.com/resources/media/img/brand/sqr/ZQO_SQ_TSPBLUE.png')">
+        <meta name="og:image" content="@yield('image','https://cdn.ganderoceanic.com/resources/media/img/brand/sqr/ZQO_SQ_TSPBLUE.png')">
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Bootstrap core CSS -->
         <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/materia/bootstrap.min.css" rel="stylesheet" integrity="sha384-5bFGNjwF8onKXzNbIcKR8ABhxicw+SC1sjTh6vhSbIbtVgUuVTm2qBZ4AaHc7Xr9" crossorigin="anonymous">        <!-- Material Design Bootstrap -->
         <!-- Material Design Bootstrap -->
@@ -339,10 +340,10 @@
                             </li>
                         </ul>
                         @auth
-                            @if(Auth::user()->hasDiscord() && !Auth::user()->memberOfCzqoGuild())
+                            @if(Auth::user()->discord_linked && !Auth::user()->member_of_discord_guild)
                             <a href="{{route('me.discord.join')}}" class="class btn btn-primary mt-3">Join The Community</a>
                             <p class="text-muted text-center mt-2">You will be redirected to Discord to allow us to add you to our server. Information collected is shown on the Discord authorisation screen. Read our privacy policy for details.</p>
-                            @elseif (Auth::user()->hasDiscord() && Auth::user()->memberOfCzqoGuild())
+                            @elseif (Auth::user()->discord_linked && Auth::user()->member_of_discord_guild)
                             <p class="mt-1"><img style="border-radius:50%; height: 30px;" class="img-fluid" src="{{Auth::user()->getDiscordAvatar()}}" alt="">&nbsp;&nbsp;{{Auth::user()->getDiscordUser()->username}}<span style="color: #d1d1d1;">#{{Auth::user()->getDiscordUser()->discriminator}}</span></p>
                             <p class="text-muted text-center mt-2">You are already a member of the Gander Oceanic Discord. To unlink your account and leave the server, go to myCZQO.</p>
                             @else
@@ -389,7 +390,7 @@
       <div class="modal-dialog modal-frame modal-top" role="document">
         <div class="modal-content">
             <div class="modal-body px-5 py-4">
-                <h4 class="blue-text">Hello{{ Auth::check() ? ', ' . Auth::user()->fullName('F') . '!' : '!' }}</h4>
+                <h4 class="blue-text">Hello{{ Auth::check() ? ', ' . Auth::user()->fname . '!' : '!' }}</h4>
                 <hr>
                 <ul class="list-unstyled">
                     <li class="nav-item">

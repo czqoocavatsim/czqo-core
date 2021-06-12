@@ -26,7 +26,7 @@
             @if($article->show_author)
             <span class="mr-2">
                     <img src="{{$article->user->avatar()}}" style="height: 35px; !important; width: 35px !important; margin-right: 5px; border-radius: 50%;">
-                    Authored by {{$article->user->fullName('FL')}}
+                    Authored by {{$article->user->full_name}}
             </span>
             <span class="mr-2">
                 •

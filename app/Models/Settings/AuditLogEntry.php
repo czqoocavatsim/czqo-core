@@ -2,7 +2,7 @@
 
 namespace App\Models\Settings;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,8 +16,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $private
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read User $affectedUser
- * @property-read User $user
+ * @property-read UserAccount $affectedUser
+ * @property-read UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|AuditLogEntry newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AuditLogEntry newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AuditLogEntry query()
@@ -37,7 +37,7 @@ class AuditLogEntry extends Model
         'user_id', 'action', 'affected_id', 'time', 'private',
     ];
 
-    public static function insert(User $user, $message, User $affected_user, $private)
+    public static function insert(UserAccount $user, $message, UserAccount $affected_user, $private)
     {
         $log = new self();
         $log->action = $message;
@@ -50,11 +50,11 @@ class AuditLogEntry extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 
     public function affectedUser()
     {
-        return $this->belongsTo(User::class, 'affected_id');
+        return $this->belongsTo(UserAccount::class, 'affected_id');
     }
 }

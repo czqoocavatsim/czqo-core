@@ -398,10 +398,10 @@
                             </li>
                         </ul>
                         @auth
-                            @if(Auth::user()->hasDiscord() && !Auth::user()->memberOfCzqoGuild())
+                            @if(Auth::user()->discord_linked && !Auth::user()->member_of_discord_guild)
                             <a href="{{route('me.discord.join')}}" class="class btn btn-primary mt-3">Join The Community</a>
                             <p class="text-muted text-center mt-2">You will be redirected to Discord to allow us to add you to our server. Information collected is shown on the Discord authorisation screen. Read our privacy policy for details.</p>
-                            @elseif (Auth::user()->hasDiscord() && Auth::user()->memberOfCzqoGuild())
+                            @elseif (Auth::user()->discord_linked && Auth::user()->member_of_discord_guild)
                             <p class="mt-1"><img style="border-radius:50%; height: 30px;" class="img-fluid" src="{{Auth::user()->getDiscordAvatar()}}" alt="">&nbsp;&nbsp;{{Auth::user()->getDiscordUser()->username}}<span style="color: #d1d1d1;">#{{Auth::user()->getDiscordUser()->discriminator}}</span></p>
                             <p class="text-muted text-center mt-2">You are already a member of the Gander Oceanic Discord. To unlink your account and leave the server, go to myCZQO.</p>
                             @else

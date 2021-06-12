@@ -31,7 +31,7 @@
                             </div>
                             <div class="ml-3">
                                 <h6>Created by</h6>
-                                <p class="mb-0">{{$resource->user->fullName('FLC')}}</p>
+                                <p class="mb-0">{{$resource->user->full_name_cid}}</p>
                             </div>
                             <div class="ml-3">
                                 <h6>Visibility</h6>

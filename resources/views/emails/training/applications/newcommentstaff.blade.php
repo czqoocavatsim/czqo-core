@@ -3,7 +3,7 @@
 @section('to-line', 'Hi,')
 
 @section('message-content')
-<p>{{$application->user->fullName('FLC')}} has sent a comment on their application.</p>
+<p>{{$application->user->full_name_cid}} has sent a comment on their application.</p>
 <b>Comment</b>
 <p>
     {{$comment->content}}

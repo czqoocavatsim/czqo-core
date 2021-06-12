@@ -1,6 +1,6 @@
 @extends('layouts.email')
 
-@section('to-line', 'Hi '. $rosterMember->user->fullName('FLC') . ',')
+@section('to-line', 'Hi '. $rosterMember->user->full_name_cid . ',')
 
 @section('message-content')
 <h2>Two Weeks Left - Activity Reminder</h2>
@@ -17,7 +17,7 @@
 Sent automatically by ActivityBot
 @endsection
 
-@section('footer-to-line', $rosterMember->user->fullName('FLC').' ('.$rosterMember->user->email.')')
+@section('footer-to-line', $rosterMember->user->full_name_cid.' ('.$rosterMember->user->email.')')
 
 @section('footer-reason-line')
 there is important information in regard to your status with Gander Oceanic.

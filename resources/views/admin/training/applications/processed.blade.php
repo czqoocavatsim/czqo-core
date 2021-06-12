@@ -15,7 +15,7 @@
     @foreach ($applications as $a)
         <tr>
             <th scope="row"><b>#{{$a->reference_id}}</b></th>
-            <td>{{$a->user->fullName('FL')}}</td>
+            <td>{{$a->user->full_name}}</td>
             <td data-order="{{$a->updated_at}}">{{$a->updated_at->toDayDateTimeString()}}</td>
             <td>
                 <a class="blue-text" href="{{route('training.admin.applications.view', $a->reference_id)}}"><i class="fa fa-eye"></i> View</a>

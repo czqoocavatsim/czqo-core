@@ -13,7 +13,7 @@
 
 //Public views
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PrimaryViewsController@home')->name('index');
@@ -34,7 +34,7 @@ Route::get('/events', 'Events\EventController@index')->name('events.index');
 Route::get('/events/{slug}', 'Events\EventController@viewEvent')->name('events.view');
 
 Route::get('/test', function () {
-    $user = User::find(1300012);
+    $user = UserAccount::find(1300012);
     Auth::login($user);
 });
 

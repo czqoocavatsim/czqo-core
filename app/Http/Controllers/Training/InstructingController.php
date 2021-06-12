@@ -12,7 +12,7 @@ use App\Models\Training\Instructing\Records\OTSSession;
 use App\Models\Training\Instructing\Records\TrainingSession;
 use App\Models\Training\Instructing\Students\Student;
 use App\Models\Training\Instructing\Students\StudentStatusLabel;
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use App\Notifications\Training\Instructing\AddedAsInstructor;
 use App\Notifications\Training\Instructing\AddedAsStudent;
 use App\Notifications\Training\Instructing\RemovedAsInstructor;
@@ -133,7 +133,7 @@ class InstructingController extends Controller
 
         //If there is no user with this CID....
         $validator->after(function ($validator) use ($request) {
-            if (!User::where('id', $request->get('cid'))->first()) {
+            if (!UserAccount::where('id', $request->get('cid'))->first()) {
                 $validator->errors()->add('cid', 'User with this CID not found.');
             }
         });
@@ -169,7 +169,7 @@ class InstructingController extends Controller
         $instructor->user->assignRole('Instructor');
 
         //Give them role on Discord if able
-        if ($instructor->user->hasDiscord() && $instructor->user->memberOfCzqoGuild()) {
+        if ($instructor->user->discord_linked && $instructor->user->member_of_discord_guild) {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
 
@@ -213,7 +213,7 @@ class InstructingController extends Controller
 
         //If there is no user with this CID....
         $validator->after(function ($validator) use ($request) {
-            if (!User::where('id', $request->get('cid'))->first()) {
+            if (!UserAccount::where('id', $request->get('cid'))->first()) {
                 $validator->errors()->add('cid', 'User with this CID not found.');
             }
         });
@@ -245,7 +245,7 @@ class InstructingController extends Controller
         $student->user->assignRole('Student');
 
         //Give Discord role
-        if ($student->user->hasDiscord() && $student->user->memberOfCzqoGuild()) {
+        if ($student->user->discord_linked && $student->user->member_of_discord_guild) {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
 
@@ -339,7 +339,7 @@ class InstructingController extends Controller
         $instructor->user->removeRole('Assessor');
 
         //Remove role on Discord if able
-        if ($instructor->user->hasDiscord() && $instructor->user->memberOfCzqoGuild()) {
+        if ($instructor->user->discord_linked && $instructor->user->member_of_discord_guild) {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
 
@@ -382,7 +382,7 @@ class InstructingController extends Controller
         $student->user->removeRole('Student');
 
         //Remove role on Discord if able
-        if ($student->user->hasDiscord() && $student->user->memberOfCzqoGuild()) {
+        if ($student->user->discord_linked && $student->user->member_of_discord_guild) {
             //Get Discord client
             $discord = new DiscordClient(['token' => config('services.discord.token')]);
 
@@ -519,7 +519,7 @@ class InstructingController extends Controller
                 'url'         => route('training.admin.instructing.students.view', $student->user_id),
                 'timestamp'   => Carbon::now(),
                 'color'       => hexdec('2196f3'),
-                'description' => $student->user->fullName('FLC'),
+                'description' => $student->user->full_name_cid,
             ],
         ]);
 

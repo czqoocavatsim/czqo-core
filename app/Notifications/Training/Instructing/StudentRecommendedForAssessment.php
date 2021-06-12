@@ -43,8 +43,8 @@ class StudentRecommendedForAssessment extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-            ->subject("{$this->student->user->fullName('FLC')} Recommended For Assessment")
-            ->line("{$this->instructor->user->fullName('FL')} has recommended student {$this->student->user->fullName('FLC')} for assessment.")
+            ->subject("{$this->student->user->full_name_cid} Recommended For Assessment")
+            ->line("{$this->instructor->user->full_name} has recommended student {$this->student->user->full_name_cid} for assessment.")
             ->action('View Student', route('training.admin.instructing.students.view', $this->student->user_id))
             ->salutation('Gander Oceanic OCA');
     }

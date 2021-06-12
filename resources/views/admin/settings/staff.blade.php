@@ -26,7 +26,7 @@
                         </div>
                         <p class="mb-0">
                             @if (!$member->vacant())
-                            {{$member->user->fullName('FLC')}}
+                            {{$member->user->full_name_cid}}
                             @else
                                 <i>Vacant</i>
                             @endif

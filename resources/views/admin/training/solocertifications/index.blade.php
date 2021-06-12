@@ -18,7 +18,7 @@
             <tr>
                 <th scope="row" class="font-weight-bold">{{$c->rosterMember->cid}}</th>
                 <td>
-                    {{$c->rosterMember->user->fullName('FL')}}
+                    {{$c->rosterMember->user->full_name}}
                 </td>
                 <td>
                     {{$c->expires->toDateString()}}
@@ -59,7 +59,7 @@
                         <select name="roster_member" id="" class="custom-select">
                             <option hidden>Please choose one....</option>
                             @foreach($trainingControllers as $c)
-                                <option value="{{$c->id}}">{{$c->user->fullName('FLC')}}</option>
+                                <option value="{{$c->id}}">{{$c->user->full_name_cid}}</option>
                             @endforeach
                         </select>
                     </div>

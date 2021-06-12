@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $accent_colour
- * @property-read \App\Models\Users\User $user
+ * @property-read \App\Models\Users\UserAccount $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserPreferences newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserPreferences newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserPreferences query()
@@ -34,11 +34,11 @@ class UserPreferences extends Model
     protected $hidden = ['id'];
 
     protected $fillable = [
-        'enable_beta_components', 'ui_mode', 'enable_discord_notifications', 'accent_colour',
+        'user_id', 'enable_beta_components', 'ui_mode', 'enable_discord_notifications', 'accent_colour',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(UserAccount::class, 'user_id');
     }
 }

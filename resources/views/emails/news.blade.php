@@ -1,6 +1,6 @@
 @extends('layouts.email')
 
-@section('to-line', 'Hi '. $user->fullName('FLC') . ',')
+@section('to-line', 'Hi '. $user->full_name_cid . ',')
 
 @section('message-content')
 <h2>{{$news->title}}</h2>
@@ -9,13 +9,13 @@
 
 @section('from-line')
 @if ($news->show_author)
-Sent by <b>{{$news->user->fullName('FLC')}} ({{$news->user->staffProfile->position}})</b>
+Sent by <b>{{$news->user->full_name_cid}} ({{$news->user->staffProfile->position}})</b>
 @else
 Sent by the Gander Oceanic Staff Team
 @endif
 @endsection
 
-@section('footer-to-line', $user->fullName('FLC').' ('.$user->email.')')
+@section('footer-to-line', $user->full_name_cid.' ('.$user->email.')')
 
 @section('footer-reason-line')
 @if ($news->email_level == 1)

@@ -13,7 +13,7 @@
             <div class="d-flex flex-row w-100 align-items-center h-100">
                 <div class="d-flex flex-column h-100">
                     <h5 class="mb-1 mt-2 fw-600">{{$s->scheduled_time->toDayDateTimeString()}} UTC</h5>
-                    <p class="mb-0">Assessor: {{$s->instructor->user->fullName('FL')}}<br>Result: {{ucfirst($s->result)}}</p>
+                    <p class="mb-0">Assessor: {{$s->instructor->user->full_name}}<br>Result: {{ucfirst($s->result)}}</p>
                 </div>
             </div>
         </a>
@@ -29,7 +29,7 @@
             <div class="d-flex flex-row w-100 align-items-center h-100">
                 <div class="d-flex flex-column h-100">
                     <h5 class="mb-1 mt-2 fw-600">{{$s->scheduled_time->toDayDateTimeString()}} UTC</h5>
-                    <p class="mb-0">Instructor: {{$s->instructor->user->fullName('FL')}}</p>
+                    <p class="mb-0">Instructor: {{$s->instructor->user->full_name}}</p>
                 </div>
             </div>
         </a>

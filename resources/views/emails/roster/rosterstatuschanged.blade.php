@@ -1,6 +1,6 @@
 @extends('layouts.email')
 
-@section('to-line', 'Hi '. $rosterMember->user->fullName('F') . ',')
+@section('to-line', 'Hi '. $rosterMember->user->fname . ',')
 
 @section('message-content')
 <p>Your roster status with Gander Oceanic has been changed.</p>
@@ -19,7 +19,7 @@
 Sent by Gander Oceanic OCA
 @endsection
 
-@section('footer-to-line', $rosterMember->user->fullName('FLC').' ('.$rosterMember->user->email.')')
+@section('footer-to-line', $rosterMember->user->full_name_cid.' ('.$rosterMember->user->email.')')
 
 @section('footer-reason-line')
 your status with Gander Oceanic has changed.

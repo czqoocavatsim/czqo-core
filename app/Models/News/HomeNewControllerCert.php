@@ -2,7 +2,7 @@
 
 namespace App\Models\News;
 
-use App\Models\Users\User;
+use App\Models\Users\UserAccount;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon $timestamp
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read User $controller
+ * @property-read UserAccount $controller
  * @method static \Illuminate\Database\Eloquent\Builder|HomeNewControllerCert newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|HomeNewControllerCert newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|HomeNewControllerCert query()
@@ -30,7 +30,7 @@ class HomeNewControllerCert extends Model
 {
     public function controller()
     {
-        return $this->belongsTo(User::class, 'controller_id');
+        return $this->belongsTo(UserAccount::class, 'controller_id');
     }
 
     protected $dates = ['timestamp'];
