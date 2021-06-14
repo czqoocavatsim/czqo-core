@@ -57,10 +57,7 @@ class PrimaryViewsController extends Controller
         });
 
         //CTP Mode?
-        $ctpMode = false;
-        if (config('app.ctp_home_page')) {
-            $ctpMode = true;
-        }
+        $ctpMode = config('app.ctp_home_page');
 
         return view('index', compact('controllers', 'news', 'certifications', 'nextEvent', 'topControllers', 'tweets', 'ctpMode'));
     }

@@ -71,6 +71,9 @@ class DiscordLibrary
         return $this->result($response);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function kick(UserAccount $user): bool
     {
         $response = Http::withHeaders($this->headers)
@@ -135,11 +138,7 @@ class DiscordLibrary
         $response = Http::withHeaders($this->headers)
             ->get("{$this->base_url}/guilds/{$this->guild_id}/members/{$user->discord_id}");
 
-        if (! $response->successful()) {
-            return false;
-        } else {
-            return true;
-        }
+        return $response->successful();
     }
 
     public function getUserProfileImage(UserAccount $user)
