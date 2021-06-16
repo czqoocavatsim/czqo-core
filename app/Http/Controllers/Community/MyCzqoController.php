@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Community;
 
 use App\Http\Controllers\Controller;
+use App\Models\Settings\RotationImage;
 use App\Models\Users\UserNotificationPreferences;
 use App\Models\Users\UserPreferences;
 use App\Models\Users\UserPrivacyPreferences;
@@ -17,6 +18,34 @@ use RestCord\DiscordClient;
 
 class MyCzqoController extends Controller
 {
+    /**
+     * Shows myczqo view.
+     */
+    public function viewMyCzqo()
+    {
+        //Create banner image
+        $bannerImg = null;
+        if (count(RotationImage::all()) >= 1) {
+            $bannerImg = RotationImage::all()->random();
+        }
+
+        //Get quote of the day
+        $quote = Cache::remember('myczqo.quote', now()->addHours(24), function () {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://quotes.rest/qod');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $output = curl_exec($ch);
+            curl_close($ch);
+            return json_decode($output);
+        });
+
+        //Return view
+        return view('my.index', [
+            'bannerImg' => $bannerImg,
+            'quote' => $quote
+        ]);
+    }
+
     /*
     Privacy Policy/Account Init
     */

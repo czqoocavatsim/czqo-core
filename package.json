@@ -2,28 +2,22 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "mix --production"
     },
     "devDependencies": {
+        "autoprefixer": "^10.2.6",
         "axios": "^0.21",
-        "cross-env": "^7.0",
-        "css-loader": "^5.0.0",
-        "laravel-mix": "^5.0.1",
+        "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "resolve-url-loader": "^3.1.0",
-        "sass": "^1.15.2",
-        "sass-loader": "^8.0.0",
-        "vue-template-compiler": "^2.6.11"
+        "postcss": "^8.3.4",
+        "tailwindcss": "^2.1.4"
     },
     "dependencies": {
-        "@fullcalendar/core": "^5.3.1",
-        "@fullcalendar/daygrid": "^5.3.2",
-        "requirejs": "^2.3.6",
-        "tui-calendar": "^1.12.14"
+        "alpinejs": "^3.0.6"
     }
 }

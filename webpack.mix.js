@@ -11,14 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.scripts([
-    'resources/js/pilot-tools.js',
-    'resources/js/policies.js',
-    'resources/js/maps.js',
-    'resources/js/myczqo.js',
-    'resources/js/preferences.js',
-    'resources/js/custom-pages.js',
-    'resources/js/instructing.js',
-    'resources/js/misc.js'
-], 'public/js/czqo.js');
-
+mix.js('resources/js/app.js', 'public/js')
+    .postCss('resources/css/app.css', 'public/css', [
+        require("tailwindcss"),
+    ]);

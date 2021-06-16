@@ -1185,19 +1185,6 @@ $(document).ready(function () {
                 } else if (select.name == 'accent_colour') {
                     $('body').attr('data-accent', select.value)
                 }
-
-                //If it's system UI mode...
-                if ($('body').data('theme') == 'system') {
-                    if (window.matchMedia) {
-                        if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-                            $("body").attr("data-theme", "dark")
-                        } else {
-                            $("body").attr("data-theme", "light")
-                        }
-                    } else {
-                        $("body").attr("data-theme", "light")
-                    }
-                }
             },
             error: function(data) {
                 console.log('Error')
@@ -1332,6 +1319,20 @@ function createInstructingSessionsCal() {
     calendar.render();
 
     return calendar;
+}
+
+function trainingSessionRemarksInit() {
+    var simplemde = new EasyMDE({ maxHeight: '200px', autofocus: true, autoRefresh: true, element: document.getElementById("contentMD")});
+    simplemde.codemirror.setOption('readOnly', true);
+    simplemde.codemirror.on("changes", function(){
+
+    });
+
+    $("#enableRemarkEditB").click(function (e) {
+        simplemde.codemirror.setOption('readOnly', false)
+        $("#enableRemarkEditB").text("Edit mode on.").addClass("text-muted").removeClass("green-text")
+        e.preventDefault()
+    })
 }
 
 $(document).ready(function () {

@@ -31,6 +31,7 @@
                 <a class="black-text font-weight-bold" href="{{route('settings.activitylog')}}">Go <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
+        
         <div class="col-md-3 mb-3">
             <div class="list-group-item h-100 p-4 z-depth-1 shadow-none">
                 <h3 class="blue-text">Staff</h3>

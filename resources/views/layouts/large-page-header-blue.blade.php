@@ -1,4 +1,4 @@
-<div class="card card-image blue rounded-0">
+div class="card card-image blue rounded-0">
     <div class="text-white text-left pb-2 pt-5 px-4">
         <div class="container">
             <div class="py-5">

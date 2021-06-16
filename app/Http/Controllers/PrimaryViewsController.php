@@ -94,7 +94,6 @@ class PrimaryViewsController extends Controller
     {
         $user = Auth::user();
 
-        $atcResources = AtcResource::all()->sortBy('title');
 
         $bannerCollection = RotationImage::all();
         if (!$bannerCollection->isEmpty()) {
@@ -116,6 +115,6 @@ class PrimaryViewsController extends Controller
             return json_decode($output);
         });
 
-        return view('my.index', compact('atcResources', 'bannerImg', 'quote'));
+        return view('my.index', compact('bannerImg', 'quote'));
     }
 }
