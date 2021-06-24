@@ -3,7 +3,7 @@
 @section('portal-content')
 <div class="container py-4">
     <div class="d-flex flex-row align-items-center">
-        <img src="{{$instructor->user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
+        <img src="{{$instructor->user->profile_image}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
         <div>
             <h2 class="blue-text mt-2 mb-1 fw-600">{{$instructor->user->full_name_cid}}</h2>
             <h5 class="fw-400">{{$instructor->staffPageTagline()}}</h5>

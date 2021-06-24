@@ -41,8 +41,9 @@ class MyCzqoController extends Controller
 
         //Return view
         return view('my.index', [
-            'bannerImg' => $bannerImg,
-            'quote' => $quote
+            'bannerImg' => $bannerImg->path,
+            'quote' => $quote,
+            '_pageTitle' => 'myCZQO'
         ]);
     }
 

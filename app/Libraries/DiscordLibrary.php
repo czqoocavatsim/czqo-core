@@ -131,12 +131,12 @@ class DiscordLibrary
 
     public function isMemberOfGuild(UserAccount $user): bool
     {
-        if (! $user->discord_user_id) {
+        if (! $user->discord_linked) {
             return false;
         }
 
         $response = Http::withHeaders($this->headers)
-            ->get("{$this->base_url}/guilds/{$this->guild_id}/members/{$user->discord_id}");
+            ->get("{$this->base_url}/guilds/{$this->guild_id}/members/{$user->discord_user_id}");
 
         return $response->successful();
     }

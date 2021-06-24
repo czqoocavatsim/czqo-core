@@ -2,6 +2,7 @@
 
 namespace App\Models\Users;
 
+use App\Enums\Preferences\ProfileImageTypeEnum;
 use App\Libraries\DiscordLibrary;
 use App\Models\News\News;
 use App\Models\Roster\RosterMember;
@@ -120,6 +121,9 @@ use Throwable;
  * @property-read bool $member_of_discord_guild
  * @property-read Role $highest_role
  * @property-read object $vatsim_membership_data
+ * @property-read bool $discord_linked
+ * @property-read mixed $initials_profile_image
+ * @property-read mixed $profile_image
  */
 class UserAccount extends Authenticatable
 {
@@ -150,6 +154,15 @@ class UserAccount extends Authenticatable
      */
     protected $hidden = [
         'remember_token'
+    ];
+
+    /**
+     * The attributes that are casts.
+     *
+     * @var string[]
+     */
+    protected $casts = [
+        'avatar_mode' => ProfileImageTypeEnum::class
     ];
 
     /**
@@ -271,7 +284,7 @@ class UserAccount extends Authenticatable
      *
      * @return bool
      */
-    public function getDiscordLinked(): bool
+    public function getDiscordLinkedAttribute(): bool
     {
         return $this->discord_user_id != null;
     }
@@ -301,7 +314,12 @@ class UserAccount extends Authenticatable
      */
     public function getDiscordProfileImageAttribute(): ?string
     {
-        return (new DiscordLibrary)->getUserProfileImage($this);
+        try {
+            return (new DiscordLibrary)->getUserProfileImage($this);
+        }
+        catch (\ErrorException $ex) {
+            return null;
+        }
     }
 
     /**
@@ -314,42 +332,41 @@ class UserAccount extends Authenticatable
         return $this->discord_dm_channel_id;
     }
 
-    /**
-     * Returns the user's avatar.
-     *
-     * @param bool $external If URL should be an external URL.
-     *
-     * @return string URL to avatar image.
-     */
-    public function avatar($external = false)
+    public function getInitialsProfileImageAttribute()
     {
-        if ($this->avatar_mode == 0) {
-            $avatar = Cache::remember('users.'.$this->id.'.initialsavatar', 172800, function () {
-                $avatar = new InitialAvatar();
-                $image = $avatar
-                    ->name($this->full_name)
-                    ->size(125)
-                    ->background('#cfeaff')
-                    ->color('#2196f3')
-                    ->generate();
-                Storage::put('public/files/avatars/'.$this->id.'/initials.png', (string) $image->encode('png'));
+        return Cache::remember('users.'.$this->id.'.initialsavatar', 172800, function () {
+            $avatar = new InitialAvatar();
+            $image = $avatar
+                ->name($this->full_name)
+                ->size(125)
+                ->background('#cfeaff')
+                ->color('#2196f3')
+                ->generate();
+            Storage::put('public/files/avatars/'.$this->id.'/initials.png', (string) $image->encode('png'));
 
-                return Storage::url('public/files/avatars/'.$this->id.'/initials.png');
-                imagedestroy($image);
-            });
-            if ($external) {
-                return URL('/').$avatar;
-            } else {
-                return $avatar;
-            }
-        } elseif ($this->avatar_mode == 1) {
-            if ($external) {
-                return URL('/').$this->avatar;
-            } else {
+            return Storage::url('public/files/avatars/'.$this->id.'/initials.png');
+        });
+    }
+
+    /**
+     * Returns the user's profile image.
+     *
+     * @return mixed|string
+     */
+    public function getProfileImageAttribute()
+    {
+        switch ($this->avatar_mode) {
+            case ProfileImageTypeEnum::Initials():
+                return $this->initials_profile_image;
+                break;
+            case ProfileImageTypeEnum::Custom():
                 return $this->avatar;
-            }
-        } else {
-            return app()->make(DiscordLibrary::class)->getUserProfileImage($this);
+                break;
+            case ProfileImageTypeEnum::Discord():
+                return $this->discord_profile_image;
+                break;
+            default:
+                return $this->initials_profile_image;
         }
     }
 }

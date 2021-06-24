@@ -11,7 +11,7 @@
             <div class="list-group-item list-group-item-action">
                 <div class="d-flex flex-row w-100 h-100">
                     @if(!$member->vacant())
-                        <img src="{{$member->user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
+                        <img src="{{$member->user->profile_image}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
                     @endif
                     <div class="h-100 w-100">
                         <div class="d-flex w-100 flex-row">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Community;
 
+use App\Enums\Preferences\ProfileImageTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Libraries\DiscordLibrary;
 use App\Models\Community\Discord\DiscordBan;
@@ -101,8 +102,8 @@ class DiscordController extends Controller
         $user->discord_dm_channel_id = null;
 
         //If they have a Discord avatar, remove it
-        if ($user->avatar_mode == 2) {
-            $user->avatar_mode = 0;
+        if ($user->avatar_mode == ProfileImageTypeEnum::Discord()) {
+            $user->avatar_mode = ProfileImageTypeEnum::Initials();
         }
 
         //Save

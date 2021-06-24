@@ -6,7 +6,7 @@
     @foreach($students as $student)
         <a href="{{route('training.admin.instructing.students.view', $student->user_id)}}" class="list-group-item list-group-item-action waves-effect">
             <div class="d-flex flex-row w-100 align-items-center h-100">
-                <img src="{{$student->user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
+                <img src="{{$student->user->profile_image}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
                 <div class="d-flex flex-column h-100">
                     <h5 class="mb-1">{{$student->user->full_name_cid}}</h5>
                     <h5>

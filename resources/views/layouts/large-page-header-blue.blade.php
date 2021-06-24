@@ -1,9 +1,5 @@
-div class="card card-image blue rounded-0">
-    <div class="text-white text-left pb-2 pt-5 px-4">
-        <div class="container">
-            <div class="py-5">
-                <h1 class="font-weight-bold" style="font-size: 3em;">{{$title}}</h1>
-            </div>
-        </div>
+<div class="bg-czqo-blue text-white text-3xl">
+    <div class=" lg:mx-auto lg:max-w-6xl px-14 py-10">
+        {{ $title }}
     </div>
 </div>
