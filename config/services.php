@@ -46,4 +46,8 @@ return [
         'staff'         => env('DISCORD_STAFF'),
         'instructors'   => env('DISCORD_INSTRUCTORS'),
     ],
+
+    'vatcan' => [
+        'secret' => env('VATCAN_SECRET'),
+    ]
 ];
