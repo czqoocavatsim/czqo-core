@@ -24,7 +24,7 @@ class MyCzqoController extends Controller
     public function viewMyCzqo()
     {
         //Create banner image
-        $bannerImg = null;
+        $bannerImg = (object)['path' => ''];
         if (count(RotationImage::all()) >= 1) {
             $bannerImg = RotationImage::all()->random();
         }

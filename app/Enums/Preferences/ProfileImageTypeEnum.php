@@ -9,6 +9,11 @@ use BenSampo\Enum\Enum;
  * @method static static Custom()
  * @method static static Discord()
  */
+/**
+ * @method static static Initials()
+ * @method static static Custom()
+ * @method static static Discord()
+ */
 final class ProfileImageTypeEnum extends Enum
 {
     const Initials =   0;
