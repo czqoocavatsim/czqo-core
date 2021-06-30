@@ -3,8 +3,8 @@
 @section('training-content')
 <a href="{{route('training.admin.instructing.training-sessions')}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> Training Sessions</a>
 <div class="d-flex flex-row align-items-center mt-3">
-    <img src="{{$session->instructor->user->avatar()}}" class="z-depth-1" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
-    <img src="{{$session->student->user->avatar()}}" class="z-depth-1" style="height: 50px; z-index: 50; margin-left: -30px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
+    <img src="{{$session->instructor->user->profile_image}}" class="z-depth-1" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
+    <img src="{{$session->student->user->profile_image}}" class="z-depth-1" style="height: 50px; z-index: 50; margin-left: -30px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
     <div>
         <h2 class="blue-text mt-2 mb-1 font-weight-bold">Training Session with {{$session->student->user->fname}}</h2>
         <h5 class="fw-500">
@@ -69,7 +69,7 @@
         <a href="{{route('training.admin.instructing.instructors.view', $session->instructor->user->id)}}" class="list-group-item list-group-item-action z-depth-1 rounded waves-effect">
             <div class="d-flex flex-row w-100 align-items-center h-100 justify-content-between">
                 <div class="d-flex flex-row align-items-center">
-                    <img src="{{$session->instructor->user->avatar()}}" style="height: 30px; width:30px;margin-right: 15px; border-radius: 50%;">
+                    <img src="{{$session->instructor->user->profile_image}}" style="height: 30px; width:30px;margin-right: 15px; border-radius: 50%;">
                     <div class="d-flex flex-column align-items-center h-100">
                         <h5 class="mb-0 fw-500">{{$session->instructor->user->full_name}}</h5>
                     </div>
@@ -87,7 +87,7 @@
         <a href="{{route('training.admin.instructing.students.view', $session->student->user->id)}}" class="list-group-item list-group-item-action z-depth-1 rounded waves-effect">
             <div class="d-flex flex-row w-100 align-items-center h-100 justify-content-between">
                 <div class="d-flex flex-row align-items-center">
-                    <img src="{{$session->student->user->avatar()}}" style="height: 30px; width:30px;margin-right: 15px; border-radius: 50%;">
+                    <img src="{{$session->student->user->profile_image}}" style="height: 30px; width:30px;margin-right: 15px; border-radius: 50%;">
                     <div class="d-flex flex-column align-items-left h-100">
                         <h5 class="mb-0 fw-500">{{$session->student->user->full_name_cid}}</h5>
                         <div class="d-flex flex-row">

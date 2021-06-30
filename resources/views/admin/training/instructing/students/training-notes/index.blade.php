@@ -3,7 +3,7 @@
 @section('training-content')
     <a href="{{route('training.admin.instructing.students.view', $student->user_id)}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> {{$student->user->full_name}}</a>
     <div class="d-flex flex-row align-items-center mt-3">
-        <img src="{{$student->user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
+        <img src="{{$student->user->profile_image}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
         <div>
             <h2 class="blue-text mt-2 mb-1">{{$student->user->fname}}'s Training Notes</h2>
         </div>

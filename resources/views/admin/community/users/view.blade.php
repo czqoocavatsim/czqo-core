@@ -3,7 +3,7 @@
     <div class="container py-4">
         <a href="{{route('community.users.index')}}" class="blue-text" style="font-size: 1.2em;"> <i class="fas fa-arrow-left"></i> Users</a>
         <div class="d-flex flex-row align-items-center">
-            <img src="{{$user->avatar()}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
+            <img src="{{$user->profile_image}}" style="height: 50px; width:50px;margin-right: 15px; margin-bottom: 3px; border-radius: 50%;">
             <div>
                 <h1 class="blue-text font-weight-bold mt-2 mb-1">{{$user->full_name}}</h1>
                 <h5>{{$user->highest_role->name}}</h5>
@@ -126,7 +126,7 @@
                 <h5 class="blue-text">Avatar</h4>
                 <div class="list-group-item z-depth-1 rounded p-3">
                     <div class="d-flex flex-row align-items-center">
-                        <img src="{{$user->avatar()}}" style="height: 100px; width: 100px; border-radius: 50%;">
+                        <img src="{{$user->profile_image}}" style="height: 100px; width: 100px; border-radius: 50%;">
                         <div class="ml-4">
                             @can('edit user details')
                             <a href="{{route('community.users.reset.avatar', $user->id)}}" class="btn btn-sm bg-light">Reset</a>

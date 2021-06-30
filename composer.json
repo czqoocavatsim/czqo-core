@@ -9,6 +9,8 @@
     "type": "project",
     "require": {
         "php": "^7.3|^8.0",
+        "atymic/twitter": "^3.1.9",
+        "bensampo/laravel-enum": "^3.4",
         "erusev/parsedown": "^1.7",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -29,7 +31,6 @@
         "socialiteproviders/discord": "^2.0",
         "spatie/laravel-activitylog": "3.17.0",
         "spatie/laravel-permission": "^4.2.0",
-        "thujohn/twitter": "^2.3",
         "wohali/oauth2-discord-new": "^1.0"
     },
     "require-dev": {

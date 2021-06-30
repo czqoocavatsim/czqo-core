@@ -34,7 +34,7 @@
     @foreach($instructors as $list)
         <div class="card p-4 z-depth-1 shadow-none mb-3" style="min-height: 160px;">
             <div class="d-flex flex-row align-items-center">
-                <a title="View Instructor Profile" href="{{route('training.admin.instructing.instructors.view', $list->user_id)}}"><img src="{{$list->user->avatar()}}" style="height: 30px; width:30px;margin-right: 10px; border-radius: 50%;"></a>
+                <a title="View Instructor Profile" href="{{route('training.admin.instructing.instructors.view', $list->user_id)}}"><img src="{{$list->user->profile_image}}" style="height: 30px; width:30px;margin-right: 10px; border-radius: 50%;"></a>
                 <div class="d-flex flex-column align-items-center h-100">
                     <h5 class="mb-0">{{$list->user->fname}}'s Students</h5>
                 </div>

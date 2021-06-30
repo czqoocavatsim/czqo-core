@@ -1,38 +1,36 @@
-@extends('layouts.primary', ['solidNavBar' => false])
-
-@section('title', 'Staff - ')
+@extends('layouts.primary')
 
 @section('content')
 @include('layouts.large-page-header-blue', ['title' => 'Staff'])
-<div class="container py-4">
-    <div class="row">
-        <div class="col-md-3 mb-3">
-            <div class="list-group" style="position: sticky; top: 20px">
+<div class="lg:mx-auto lg:max-w-6xl px-14 py-6">
+    <div class="grid grid-cols-4 gap-6">
+        <div class="">
+            <div class="flex flex-col space-y-2" style="position: sticky; top: 20px">
                 @foreach($groups as $g)
-                <a href="#{{$g->slug}}" class="list-group-item list-group-item-action">
+                <a href="#{{$g->slug}}" class="hover:bg-czqo-blue hover:text-white transition px-4 py-3 rounded-md border">
                     {{$g->name}}
                 </a>
                 @endforeach
-                <a href="#instructors" class="list-group-item list-group-item-action">Instructors</a>
+                <a href="#instructors" class="hover:bg-czqo-blue hover:text-white transition px-4 py-3 rounded-md border">Instructors</a>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-span-3">
             @foreach($groups as $g)
-            <a id="{{$g->slug}}"><h3 class="mb-3 blue-text font-weight-bold">{{$g->name}}</h3></a>
-            <p style="margin-top: 5px; margin-bottom: 10px;">{{$g->description}}</p>
+            <a id="{{$g->slug}}"><h3 class="mb-3 text-czqo-blue text-2xl">{{$g->name}}</h3></a>
+            <p class="text-gray-600 text-sm">{{$g->description}}</p>
             @if ($g->slug == 'seniorstaff')
-                <div class="row">
+                <div class="grid grid-cols-2 gap-4 mt-4">
                     @foreach($g->members as $member)
-                        <div class="@if($member->shortform == 'ocachief') col-md-12 @else col-md-6 @endif mb-3">
-                            <div class="card shadow-none grey lighten-4 p-4" style="height: 100%;">
-                                <div class="d-flex flex-row">
+                        <div class="@if($member->shortform == 'ocachief') col-span-2 @else col-span-1 @endif">
+                            <div class="p-4 bg-gray-100 h-full rounded-md">
+                                <div class="flex flex-row">
                                     @if(!$member->vacant())
-                                    <img src="{{$member->user->avatar()}}" style="height: 80px; width:80px;margin-right: 15px; border-radius: 50%;">
+                                    <img src="{{$member->user->profile_image}}" class="h-20 w-20 mr-6 rounded-full">
                                     @else
-                                    <img src="https://cdn.ganderoceanic.com/resources/user.png" style="height: 80px; width:80px;margin-right: 15px; border-radius: 50%;">
+                                    <img src="https://ganderoceanicoca.ams3.cdn.digitaloceanspaces.com/resources/user.png" class="h-20 w-20 mr-6 rounded-full">
                                     @endif
-                                    <div class="d-flex flex-column">
-                                        <h4 class="font-weight-bold">
+                                    <div class="flex flex-col space-y-2">
+                                        <h4 class="text-xl font-bold">
                                             @if($member->vacant())
                                             Vacant
                                             @else
@@ -40,9 +38,9 @@
                                             @endif
                                         </h4>
                                         <h5>{{$member->position}}</h5>
-                                        <p>{{$member->description}}</p>
-                                        <p class="mb-0">
-                                            <a href="mailto:{{$member->email}}"><i class="fa fa-envelope"></i>&nbsp;Email</a>@if(!$member->vacant())&nbsp;&nbsp;•&nbsp;&nbsp;<a href=""  data-toggle="modal" data-target="#viewStaffBio{{$member->id}}"><i class="fas fa-user"></i>&nbsp;Biography</a>@endif
+                                        <p class="text-sm text-gray-600">{{$member->description}}</p>
+                                        <p class="mt-3 text-sm">
+                                            <a class="hover:underline text-blue-500" href="mailto:{{$member->email}}">Email</a>
                                         </p>
                                     </div>
                                 </div>
@@ -53,26 +51,26 @@
             @else
             <div class="row">
                 @foreach($g->members as $member)
-                    <div class="col-md-6 mb-3">
-                        <div class="card shadow-none grey lighten-4 p-4" style="height: 100%;">
-                            <div class="d-flex flex-row">
+                    <div class="@if($member->shortform == 'ocachief') col-span-2 @else col-span-1 @endif">
+                        <div class="p-4 bg-gray-100 h-full rounded-md">
+                            <div class="flex flex-row">
                                 @if(!$member->vacant())
-                                <img src="{{$member->user->avatar()}}" style="height: 80px; width:80px;margin-right: 15px; border-radius: 50%;">
+                                    <img src="{{$member->user->profile_image}}" class="h-20 w-20 mr-6 rounded-full">
                                 @else
-                                <img src="https://cdn.ganderoceanic.com/resources/user.png" style="height: 80px; width:80px;margin-right: 15px; border-radius: 50%;">
+                                    <img src="https://ganderoceanicoca.ams3.cdn.digitaloceanspaces.com/resources/user.png" class="h-20 w-20 mr-6 rounded-full">
                                 @endif
-                                <div class="d-flex flex-column">
-                                    <h4 class="font-weight-bold">
+                                <div class="flex flex-col space-y-2">
+                                    <h4 class="text-xl font-bold">
                                         @if($member->vacant())
-                                        Vacant
+                                            Vacant
                                         @else
-                                        {{$member->user->full_name}}
+                                            {{$member->user->full_name}}
                                         @endif
                                     </h4>
                                     <h5>{{$member->position}}</h5>
-                                    <p>{{$member->description}}</p>
-                                    <p class="mb-0">
-                                        <a href="mailto:{{$member->email}}"><i class="fa fa-envelope"></i>&nbsp;Email</a>@if(!$member->vacant())&nbsp;&nbsp;•&nbsp;&nbsp;<a href=""  data-toggle="modal" data-target="#viewStaffBio{{$member->id}}"><i class="fas fa-user"></i>&nbsp;Biography</a>@endif
+                                    <p class="text-sm text-gray-600">{{$member->description}}</p>
+                                    <p class="mt-3 text-sm">
+                                        <a class="hover:underline text-blue-500" href="mailto:{{$member->email}}">Email</a>
                                     </p>
                                 </div>
                             </div>
@@ -89,7 +87,7 @@
                     <div class="col-md-6 mb-3">
                         <div class="card shadow-none grey lighten-4 p-4" style="height: 100%;">
                             <div class="d-flex flex-row">
-                                <img src="{{$instructor->user->avatar()}}" style="height: 80px; width:80px;margin-right: 15px; border-radius: 50%;">
+                                <img src="{{$instructor->user->profile_image}}" style="height: 80px; width:80px;margin-right: 15px; border-radius: 50%;">
                                 <div class="d-flex flex-column">
                                     <h4 class="font-weight-bold">
                                         {{$instructor->user->full_name}}

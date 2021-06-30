@@ -73,7 +73,7 @@
                                 @if($comment->user_id != Auth::id())
                                     <div class="align-self-start mb-2" style="width: 75%;">
                                         <div class="d-flex flex-row align-items-centre">
-                                            <img src="{{$comment->user->avatar()}}" style="height: 30px; width: 30px; margin-right: 7px; border-radius: 50%;">
+                                            <img src="{{$comment->user->profile_image}}" style="height: 30px; width: 30px; margin-right: 7px; border-radius: 50%;">
                                             <div style="width: 44%;" class="blue white-text rounded p-2">
                                                 <span class="font-weight-bold">{{$comment->user->full_name}} @if($comment->user->staffProfile) ({{$comment->user->staffProfile->position}}) @endif</span><br>
                                                 {{$comment->content}}
@@ -88,7 +88,7 @@
                                                 <span class="font-weight-bold">You</span><br>
                                                 {{$comment->content}}
                                             </div>
-                                            <img src="{{Auth::user()->avatar()}}" style="height: 30px; width: 30px; margin-left: 7px; border-radius: 50%;">
+                                            <img src="{{Auth::user()->profile_image}}" style="height: 30px; width: 30px; margin-left: 7px; border-radius: 50%;">
                                         </div>
                                         <span style="font-size: 0.8em; margin-top: 4px; text-align:right; float:right;" class="text-muted">{{$comment->created_at->diffForHumans()}}</span>
                                     </div>

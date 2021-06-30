@@ -1,8 +1,10 @@
 <?php
 
-Route::get('/', 'PrimaryViewsController@home')->name('index');
+use App\Http\Controllers\ViewsController;
+
+Route::get('/', [ViewsController::class, 'home'])->name('index');
 Route::get('/map', 'PrimaryViewsController@map')->name('map');
-Route::get('/roster', 'Roster\RosterController@publicRoster')->name('roster.public');
+Route::get('/roster', [ViewsController::class, 'controllerRoster'])->name('roster.public');
 Route::get('/roster/solo-certs', 'Training\SoloCertificationsController@public')->name('solocertifications.public');
 Route::get('/staff', function () { return redirect(route('staff'), 301); });
 Route::get('/atc/resources', 'Publications\PublicationsController@atcResources')->name('atcresources.index');

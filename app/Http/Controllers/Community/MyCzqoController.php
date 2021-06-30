@@ -24,7 +24,7 @@ class MyCzqoController extends Controller
     public function viewMyCzqo()
     {
         //Create banner image
-        $bannerImg = null;
+        $bannerImg = (object)['path' => ''];
         if (count(RotationImage::all()) >= 1) {
             $bannerImg = RotationImage::all()->random();
         }
@@ -41,8 +41,9 @@ class MyCzqoController extends Controller
 
         //Return view
         return view('my.index', [
-            'bannerImg' => $bannerImg,
-            'quote' => $quote
+            'bannerImg' => $bannerImg->path,
+            'quote' => $quote,
+            '_pageTitle' => 'myCZQO'
         ]);
     }
 
