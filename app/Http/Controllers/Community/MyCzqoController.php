@@ -25,7 +25,7 @@ class MyCzqoController extends Controller
     {
         //Create banner image
         $bannerImg = (object)['path' => ''];
-        if (count(RotationImage::all()) >= 1) {
+        if (RotationImage::count() >= 1) {
             $bannerImg = RotationImage::all()->random();
         }
 

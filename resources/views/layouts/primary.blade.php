@@ -23,7 +23,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body class="min-h-screen">
-    <nav class="bg-white">
+    <nav class="bg-gray-200">
         <div class="lg:mx-auto lg:max-w-6xl px-14 py-5 flex flex-row items-center md:space-y-0 justify-between">
             <div class="">
                 <a href="{{route('index')}}">
@@ -295,7 +295,7 @@
             <div class="hidden md:flex flex-row text-sm transition items-center space-x-4">
                 <div x-data="{ drop: false }" class="relative inline-block text-left">
                     <div>
-                        <a @click="drop = true" type="button" class="inline-flex items-center cursor-pointer hover:text-czqo-blue">
+                        <a @click="drop = true" type="button" class="appearance-none inline-flex items-center cursor-pointer hover:text-czqo-blue">
                             About
                             <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -339,7 +339,7 @@
                 </div>
                 <div x-data="{ drop: false }" class="relative inline-block text-left">
                     <div>
-                        <a @click="drop = true" type="button" class="inline-flex items-center cursor-pointer hover:text-czqo-blue">
+                        <a @click="drop = true" type="button" class="appearance-none inline-flex items-center cursor-pointer hover:text-czqo-blue">
                             Roster
                             <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -361,12 +361,12 @@
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('events.index') }}" type="button" class="inline-flex items-center cursor-pointer hover:text-czqo-blue">
+                <a href="{{ route('events.index') }}" type="button" class="appearance-none inline-flex items-center cursor-pointer hover:text-czqo-blue">
                     Events
                 </a>
                 <div x-data="{ drop: false }" class="relative inline-block text-left">
                     <div>
-                        <a @click="drop = true" type="button" class="inline-flex items-center cursor-pointer hover:text-czqo-blue">
+                        <a @click="drop = true" type="button" class="appearance-none inline-flex items-center cursor-pointer hover:text-czqo-blue">
                             Controllers
                             <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -400,7 +400,7 @@
                 </div>
                 <div x-data="{ drop: false }" class="relative inline-block text-left">
                     <div>
-                        <a @click="drop = true" type="button" class="inline-flex items-center cursor-pointer hover:text-czqo-blue">
+                        <a @click="drop = true" type="button" class="appearance-none inline-flex items-center cursor-pointer hover:text-czqo-blue">
                             Pilots
                             <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -434,7 +434,7 @@
                 </div>
                 <div x-data="{ drop: false }" class="relative inline-block text-left">
                     <div>
-                        <a @click="drop = true" type="button" class="inline-flex items-center cursor-pointer hover:text-czqo-blue">
+                        <a @click="drop = true" type="button" class="appearance-none inline-flex items-center cursor-pointer hover:text-czqo-blue">
                             Community
                             <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -482,9 +482,9 @@
                     </div>
                 </div>
                 @auth
-                    <div x-data="{ drop: false }" class="relative inline-block text-left">
+                    <div x-data="{ drop: false }" class="relative inline-block text-left appearance-none">
                         <div class="group hover:bg-czqo-blue py-2 px-4 rounded-md transition">
-                            <a @click="drop = true" type="button" class="flex flex-row items-center cursor-pointer space-x-3">
+                            <a @click="drop = true" type="button" class="appearance-none flex flex-row items-center cursor-pointer space-x-3">
                                 <img src="{{ auth()->user()->profile_image }}" alt="" class="h-10 rounded-full">
                                 <span class="font-bold text-czqo-blue group-hover:text-white transition">
                                     {{ auth()->user()->full_name }}
