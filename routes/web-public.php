@@ -23,7 +23,7 @@ Route::get('/events/{slug}', 'Events\EventController@viewEvent')->name('events.v
 Route::prefix('about')->group(function () {
     Route::get('/', function () { return redirect(route('about.who-we-are'), 301); })->name('about.index');
     Route::view('/who-we-are', 'about.who-we-are')->name('about.who-we-are');
-    Route::view('/core', 'about.about-core')->name('about.core');
+    Route::view('/app', 'about.app')->name('about.app');
     Route::get('/staff', 'Users\StaffListController@index')->name('staff');
 });
 

@@ -31,6 +31,7 @@
         "socialiteproviders/discord": "^2.0",
         "spatie/laravel-activitylog": "3.17.0",
         "spatie/laravel-permission": "^4.2.0",
+        "spatie/valuestore": "^1.2",
         "wohali/oauth2-discord-new": "^1.0"
     },
     "require-dev": {
@@ -45,6 +46,10 @@
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
+        "files": [
+            "app/Helpers.php",
+            "app/AppSettings.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"
