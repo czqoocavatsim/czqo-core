@@ -23,7 +23,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body class="min-h-screen">
-    <nav class="bg-gray-200">
+    <nav class="bg-gray-100">
         <div class="lg:mx-auto lg:max-w-6xl px-14 py-5 flex flex-row items-center md:space-y-0 justify-between">
             <div class="">
                 <a href="{{route('index')}}">
@@ -557,14 +557,14 @@
     <footer class="text-sm text-gray-600">
         <div class="lg:mx-auto lg:max-w-6xl py-12 px-14">
             <p>
-                Copyright (C) Gander Oceanic OCA 2018-2021. All Rights Reserved.<br>Not to be used for real world navigation. Flight simulation only.
+                Copyright (C) Gander Oceanic OCA {{ app_settings()->get('copyright_year') }}. All Rights Reserved.<br>Not to be used for real world navigation. Flight simulation only.
             </p>
             <div class="mt-4">
                 <a href="https://ganderoceanic.ca" class="hover:underline">Feedback</a>
                 &nbsp;
                 •
                 &nbsp;
-                <a href="https://ganderoceanic.ca/about/core" class="hover:underline">About</a>
+                <a href="{{ route('about.app') }}" class="hover:underline">About</a>
                 &nbsp;
                 •
                 &nbsp;
