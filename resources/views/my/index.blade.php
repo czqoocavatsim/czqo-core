@@ -23,15 +23,28 @@
             "{{$quote->contents->quotes[0]->quote}}" ~ {{$quote->contents->quotes[0]->author}}
         </div>
         <div>
-            <div class="text-xl text-czqo-blue font-medium">
-                Notifications and reminders
-            </div>
-            <div class="mt-4 flex flex-row space-x-8">
-                <a class="flex flex-column space-y-3 3group hover:underline cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-czqo-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <span class="text-gray-700">Change profile image</span>
+            <div class="flex flex-row space-x-4">
+                <a class="p-4 border rounded-md text-sm flex flex-col space-y-3 cursor-pointer hover:bg-gray-100 transition">
+                    <div class="flex flex-row space-x-2 items-center font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                        <span>Sample notification</span>
+                    </div>
+                    <p class="text-xs text-gray-700">
+                        Notification content
+                    </p>
+                </a>
+                <a class="p-4 border rounded-md text-sm flex flex-col space-y-3 cursor-pointer hover:bg-gray-100 transition">
+                    <div class="flex flex-row space-x-2 items-center font-medium">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                        <span>Sample notification</span>
+                    </div>
+                    <p class="text-xs text-gray-700">
+                        Notification content
+                    </p>
                 </a>
             </div>
         </div>
@@ -109,6 +122,19 @@
                         </a>
                     </div>
                 @endif
+            </div>
+        </div>
+        <div>
+            <div class="text-xl text-czqo-blue font-medium">
+                Management
+            </div>
+            <div class="mt-4 flex flex-row space-x-8">
+                <a href="{{ route('me.data') }}" class="flex flex-row space-x-2 group hover:underline cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-czqo-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+                    </svg>
+                    <span class="text-gray-700">Manage your data</span>
+                </a>
             </div>
         </div>
     </div>
